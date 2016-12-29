@@ -331,8 +331,7 @@ public class StageActivity extends AppCompatActivity {
         b30.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 editText.setText(editText.getText().insert(editText.getText().length(), " "));
             }
         });
