@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="a.atbash.MainActivity">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:maxLines="8"
+        android:lines="8"
+        android:id="@+id/clue"
+        tools:height="200dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:layout_above="@+id/checkButton"
+        android:layout_alignTop="@+id/clueButton"
+        android:layout_alignRight="@+id/checkAns"
+        android:layout_alignEnd="@+id/checkAns"
+        android:layout_toRightOf="@+id/checkButton"
+        android:layout_toEndOf="@+id/checkButton" />
+
+    <Button
+        android:layout_width="38dp"
+        android:layout_height= "40dp"
+        android:text = "ך"
+        android:id = "@+id/n25"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="253dp"
+        android:layout_alignBottom="@+id/gridLayout"
+        />
+
+    <Button
+        android:layout_width="38dp"
+        android:layout_height= "40dp"
+        android:text = "ץ"
+        android:id = "@+id/n26"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="253dp"
+        android:layout_alignBottom="@+id/gridLayout"/>
+
+    <Button
+        android:layout_width="38dp"
+        android:layout_height= "40dp"
+        android:text = "ף"
+        android:id = "@+id/n27"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="285dp"
+        android:layout_alignBottom="@+id/gridLayout"
+        />
+    <Button
+        android:layout_width="38dp"
+        android:layout_height= "40dp"
+        android:text = "."
+        android:id = "@+id/n28"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="285dp"
+        android:layout_alignBottom="@+id/gridLayout"
+        />
+    <Button
+        android:layout_width="70dp"
+        android:layout_height= "40dp"
+        android:text = "->"
+        android:id = "@+id/n29"
+        android:layout_marginBottom="80dp"
+        android:layout_marginLeft="253dp"
+        android:layout_alignBottom="@+id/gridLayout"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:layout_above="@+id/gridLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation = "horizontal"
+        android:columnCount="8"
+        android:id="@+id/gridLayout"
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "ק"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n1"
+            />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "ר"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n2"
+            />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "א"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n3"
+            />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "ט"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n4"
+            />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "ו"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n5"
+            />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "ן"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n6"
+            />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "ם"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n7"
+            />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "פ"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n8"
+            />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "ש"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n9"
+            />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "ד"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n10"
+            />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "ג"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n11"
+        />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "כ"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n12"
+            />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "ע"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n13"
+            />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "י"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n14"
+            />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "ח"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n15"
+            />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "ל"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n16"
+            />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "ז"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n17"
+            />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "ס"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n18"
+            />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "ב"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n19"
+            />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "ה"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n20"
+            />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "נ"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n21"
+            />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "מ"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n22"
+            />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "צ"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n23"
+            />
+        <Button
+            android:layout_width="38dp"
+            android:layout_height= "40dp"
+            android:text = "ת"
+            android:layout_marginLeft="-6dp"
+            android:id = "@+id/n24"
+            />
+    </GridLayout>
+
+    <Button
+        android:text="חזור"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/BACK"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="בדיקה"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkButton"
+        android:layout_above="@+id/editText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="19dp" />
+
+    <Button
+        android:text="רמז"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/clueButton"
+        android:layout_above="@+id/checkButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:maxLines="8"
+        android:lines="8"
+        android:id="@+id/question"
+        tools:height="200dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:layout_below="@+id/BACK"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/clue"
+        android:layout_alignEnd="@+id/clue"
+        android:layout_above="@+id/clue" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:maxLines="8"
+        android:lines = "8"
+        android:id="@+id/checkAns"
+        tools:height="200dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:layout_below="@+id/clue"
+        android:layout_alignRight="@+id/n25"
+        android:layout_alignEnd="@+id/n25"
+        android:layout_toRightOf="@+id/checkButton"
+        android:layout_toEndOf="@+id/checkButton"
+        android:layout_alignBottom="@+id/checkButton" />
+
+    <Button
+        android:text="רווח"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/n30"
+        android:layout_below="@+id/n25"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
