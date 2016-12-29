@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     EditText editText;
     EditText editCheckText;
     EditText editTextClue;
+    EditText editTextQ;
     Button b1;
     Button b2;
     Button b3;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         editText = (EditText)findViewById(R.id.editText);
         editCheckText =(EditText)findViewById(R.id.checkAns);
         editTextClue=(EditText)findViewById(R.id.clue);
+        editTextQ=(EditText)findViewById(R.id.question);
         b1 = (Button)findViewById((R.id.n1));
         b2 = (Button)findViewById((R.id.n2));
         b3 = (Button)findViewById((R.id.n3));
