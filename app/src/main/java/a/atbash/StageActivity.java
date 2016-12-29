@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import java.lang.Object;
-//fffff
+
 public class StageActivity extends AppCompatActivity {
 
     EditText editText;
@@ -374,3 +374,4 @@ public class StageActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
+
