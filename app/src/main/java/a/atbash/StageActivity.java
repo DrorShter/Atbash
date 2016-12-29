@@ -1,5 +1,6 @@
 package a.atbash;
 
+import android.content.Intent;
 import android.support.annotation.Dimension;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -47,6 +48,7 @@ public class StageActivity extends AppCompatActivity {
     Button b30;
     Button bC;
     Button bClue;
+    Button back;
     GridLayout gridLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,6 +59,7 @@ public class StageActivity extends AppCompatActivity {
         editCheckText =(EditText)findViewById(R.id.checkAns);
         editTextClue=(EditText)findViewById(R.id.clue);
         editTextQ=(EditText)findViewById(R.id.question);
+        back = (Button)findViewById(R.id.BACK);
         b1 = (Button)findViewById((R.id.n1));
         b2 = (Button)findViewById((R.id.n2));
         b3 = (Button)findViewById((R.id.n3));
@@ -364,5 +367,10 @@ public class StageActivity extends AppCompatActivity {
                 editTextClue.setText("שם ערבי נפוץ");
             }
         });
+    }
+    public void sendMessage(View view)
+    {
+        Intent intent = new Intent(StageActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 }
