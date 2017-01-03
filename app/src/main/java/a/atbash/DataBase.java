@@ -217,7 +217,7 @@ public class DataBase extends SQLiteOpenHelper
         String Question=cur.getString(cur.getColumnIndex("Question"));
         String Hint=cur.getString(cur.getColumnIndex("Hint"));
         Stage s=new Stage(number,Question,Hint,Answer);
-        //gitrcnoam
+        //gitrcnoam2
         return s;
     }
 
