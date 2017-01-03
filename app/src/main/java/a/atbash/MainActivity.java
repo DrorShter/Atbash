@@ -19,11 +19,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         b = (Button)findViewById((R.id.button));
-        System.out.println("start");
-        //SQLiteDatabase db = SQLiteDatabase.openDatabase("AtbashClient", null, 0);
-        //db.execSQL("create table if not exists sampletable (name text, location text)");
-        //db.execSQL("insert into sampletable values('ram','hyd')");
-
         DataBase myDbHelper;
         myDbHelper = new DataBase(this);
 
@@ -42,17 +37,9 @@ public class MainActivity extends AppCompatActivity {
             myDbHelper.openDataBase();
 
         }catch(SQLException sqle){
-            throw new Error("Noam! Second Try");
+            throw new Error("fuck");
 
         }
-        System.out.println("before");
-        Cursor cursor = myDbHelper.x();
-        cursor.moveToFirst();
-        String name = cursor.getString(0);
-        String name2 = cursor.getString(1);
-        System.out.println(name);
-        System.out.println(name2);
-        System.out.println("hi");
     }
     public void sendMessage(View view)
     {

@@ -1,5 +1,6 @@
 package a.atbash;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Dimension;
 import android.support.v7.app.AppCompatActivity;
@@ -8,10 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
+
+import java.io.IOException;
 import java.lang.Object;
+import java.sql.SQLException;
 
 public class StageActivity extends AppCompatActivity {
-
+    DataBase dataBase=new DataBase(this);
+    Stage stage;
     EditText editText;
     EditText editCheckText;
     EditText editTextClue;
@@ -55,6 +60,25 @@ public class StageActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        try {
+
+            dataBase.createDataBase();
+
+        } catch (IOException ioe) {
+
+            throw new Error("Unable to create database");
+
+        }
+
+        try {
+
+            dataBase.openDataBase();
+
+        }catch(SQLException sqle){
+            throw new Error("fuck");
+
+        }
         editText = (EditText)findViewById(R.id.editText);
         editCheckText =(EditText)findViewById(R.id.checkAns);
         editTextClue=(EditText)findViewById(R.id.clue);
@@ -92,6 +116,8 @@ public class StageActivity extends AppCompatActivity {
         b30 = (Button)findViewById((R.id.n30));
         bC = (Button)findViewById((R.id.checkButton));
         bClue = (Button)findViewById((R.id.clueButton));
+        stage=dataBase.getStage(1);System.out.println("i know");
+        editTextQ.setText(stage.getQuestion());
 
         b1.setOnClickListener(new View.OnClickListener()
         {
@@ -340,7 +366,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                if((editText.getText().toString()).equals("מוחמד"))
+                if((editText.getText().toString()).equals(stage.getAnswer()))
                 {
                     editCheckText.setText("נכון מאוד!");
                 }
@@ -363,7 +389,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editTextClue.setText("שם ערבי נפוץ");
+                editTextClue.setText(stage.getClue());
             }
         });
     }

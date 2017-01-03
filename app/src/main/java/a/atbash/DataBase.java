@@ -175,5 +175,50 @@ public class DataBase extends SQLiteOpenHelper
     // Add your public helper methods to access and get content from the database.
     // You could return cursors by doing "return myDataBase.query(....)" so it'd be easy
     // to you to create adapters for your views.
+    public Cursor queryForStage(int num)
+    {
+        return myDataBase.rawQuery("SELECT * FROM Level where numberOfQuestion=="+num, null);
+    }
+    public Stage getStage(int numOfQuestion)
+    {
+        DataBase dataBase=new DataBase(myContext);
+        try {
+
+            dataBase.createDataBase();
+
+        } catch (IOException ioe) {
+
+            throw new Error("Unable to create database");
+
+        }
+
+        try {
+
+            dataBase.openDataBase();
+
+        }catch(SQLException sqle){
+            throw new Error("fuck");
+
+        }
+
+       /* Cursor cur= dataBase.queryForStage(numOfQuestion);System.out.println("i'm in");
+        cur.moveToFirst();
+        int number=cur.getInt(cur.getColumnIndex("NumberOfQustion"));
+        String Answer=cur.getString((cur.getColumnIndex("Answer")));
+        String Question=cur.getString(cur.getColumnIndex("Question"));
+        String Hint=cur.getString(cur.getColumnIndex("Hint"));
+        Stage s=new Stage(number,Question,Hint,Answer);
+        return s;*/
+        Cursor cur= myDataBase.rawQuery("SELECT * FROM Level where numberOfQuestion==1", null);
+        System.out.print(cur);
+        cur.moveToFirst();
+        int number=cur.getInt(cur.getColumnIndex("NumberOfQustion"));
+        String Answer=cur.getString((cur.getColumnIndex("Answer")));
+        String Question=cur.getString(cur.getColumnIndex("Question"));
+        String Hint=cur.getString(cur.getColumnIndex("Hint"));
+        Stage s=new Stage(number,Question,Hint,Answer);
+        //git
+        return s;
+    }
 
 }
