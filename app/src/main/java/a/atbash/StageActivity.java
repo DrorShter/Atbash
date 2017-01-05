@@ -16,7 +16,7 @@ import java.sql.SQLException;
 
 public class StageActivity extends AppCompatActivity {
     DataBase dataBase=new DataBase(this);
-    Stage stage;
+    Stage x;
     EditText editText;
     EditText editCheckText;
     EditText editTextClue;
@@ -60,24 +60,23 @@ public class StageActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        try {
-
-            dataBase.createDataBase();
-
-        } catch (IOException ioe) {
-
-            throw new Error("Unable to create database");
-
+        DataBase myDbHelper;
+        myDbHelper = new DataBase(this);
+        try
+        {
+            myDbHelper.createDataBase();
         }
-
-        try {
-
-            dataBase.openDataBase();
-
-        }catch(SQLException sqle){
+        catch (IOException ioe)
+        {
+            throw new Error("Unable to create database");
+        }
+        try
+        {
+            myDbHelper.openDataBase();
+        }
+        catch (SQLException sqle)
+        {
             throw new Error("fuck");
-
         }
         editText = (EditText)findViewById(R.id.editText);
         editCheckText =(EditText)findViewById(R.id.checkAns);
@@ -116,9 +115,11 @@ public class StageActivity extends AppCompatActivity {
         b30 = (Button)findViewById((R.id.n30));
         bC = (Button)findViewById((R.id.checkButton));
         bClue = (Button)findViewById((R.id.clueButton));
-        stage=dataBase.getStage(1);System.out.println("i know");
-        editTextQ.setText(stage.getQuestion());
-
+        System.out.println("good");
+        final Stage x = myDbHelper.getStage(1);
+        System.out.println("good2");
+        editTextQ.setText(x.getQuestion());
+        editTextClue.setText(x.getClue());
         b1.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -366,7 +367,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                if((editText.getText().toString()).equals(stage.getAnswer()))
+                if((editText.getText().toString()).equals(x.getAnswer()))
                 {
                     editCheckText.setText("נכון מאוד!");
                 }
@@ -389,9 +390,10 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editTextClue.setText(stage.getClue());
+                editTextClue.setText(x.getClue());
             }
         });
+
     }
     public void sendMessage(View view)
     {

@@ -19,27 +19,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         b = (Button)findViewById((R.id.button));
-        DataBase myDbHelper;
-        myDbHelper = new DataBase(this);
 
-        try {
 
-            myDbHelper.createDataBase();
-
-        } catch (IOException ioe) {
-
-            throw new Error("Unable to create database");
-
-        }
-
-        try {
-
-            myDbHelper.openDataBase();
-
-        }catch(SQLException sqle){
-            throw new Error("fuck");
-
-        }
+        System.out.println("hi");
+        //Stage x = myDbHelper.getStage(1);
+        //System.out.println(x.getAnswer());
     }
     public void sendMessage(View view)
     {
