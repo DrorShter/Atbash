@@ -107,7 +107,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "ק"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.kuf)));
             }
         });
         b2.setOnClickListener(new View.OnClickListener()
@@ -115,7 +115,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "ר"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.reish)));
             }
         });
         b3.setOnClickListener(new View.OnClickListener()
@@ -123,7 +123,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "א"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.alef)));
             }
         });
         b4.setOnClickListener(new View.OnClickListener()
@@ -131,7 +131,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "ט"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.tet)));
             }
         });
         b5.setOnClickListener(new View.OnClickListener()
@@ -139,7 +139,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "ו"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.vav)));
             }
         });
         b6.setOnClickListener(new View.OnClickListener()
@@ -147,7 +147,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "ן"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.nunSofit)));
             }
         });
         b7.setOnClickListener(new View.OnClickListener()
@@ -155,7 +155,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "ם"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.memSofit)));
             }
         });
         b8.setOnClickListener(new View.OnClickListener()
@@ -163,7 +163,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "פ"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.pei)));
             }
         });
         b9.setOnClickListener(new View.OnClickListener()
@@ -171,7 +171,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "ש"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.shin)));
             }
         });
         b10.setOnClickListener(new View.OnClickListener()
@@ -179,7 +179,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "ד"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.dalet)));
             }
         });
         b11.setOnClickListener(new View.OnClickListener()
@@ -187,7 +187,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "ג"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.gimel)));
             }
         });
         b12.setOnClickListener(new View.OnClickListener()
@@ -195,7 +195,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "כ"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.caf)));
             }
         });
         b13.setOnClickListener(new View.OnClickListener()
@@ -203,7 +203,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "ע"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.ain)));
             }
         });
         b14.setOnClickListener(new View.OnClickListener()
@@ -211,7 +211,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "י"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.yud)));
             }
         });
         b15.setOnClickListener(new View.OnClickListener()
@@ -219,7 +219,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "ח"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.het)));
             }
         });
         b16.setOnClickListener(new View.OnClickListener()
@@ -227,7 +227,7 @@ public class StageActivity extends AppCompatActivity {
         @Override
         public void onClick(View v)
         {
-            editText.setText(editText.getText().insert(editText.getText().length(), "ל"));
+            editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.lamed)));
         }
         });
         b17.setOnClickListener(new View.OnClickListener()
@@ -235,7 +235,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "ז"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.zain)));
             }
         });
         b18.setOnClickListener(new View.OnClickListener()
@@ -243,7 +243,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "ס"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.samech)));
             }
         });
         b19.setOnClickListener(new View.OnClickListener()
@@ -251,7 +251,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "ב"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.bet)));
             }
         });
         b20.setOnClickListener(new View.OnClickListener()
@@ -259,7 +259,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "ה"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.hei)));
             }
         });
         b21.setOnClickListener(new View.OnClickListener()
@@ -267,7 +267,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "נ"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.nun)));
             }
         });
         b22.setOnClickListener(new View.OnClickListener()
@@ -275,7 +275,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "מ"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.mem)));
             }
         });
         b23.setOnClickListener(new View.OnClickListener()
@@ -283,7 +283,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "צ"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.tzadick)));
             }
         });
         b24.setOnClickListener(new View.OnClickListener()
@@ -291,7 +291,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editText.setText(editText.getText().insert(editText.getText().length(), "ת"));
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.));
             }
         });
         b25.setOnClickListener(new View.OnClickListener()
@@ -351,14 +351,14 @@ public class StageActivity extends AppCompatActivity {
             {
                 if((editText.getText().toString()).equals(x.getAnswer()))
                 {
-                    editCheckText.setText("נכון מאוד!");
+                    editCheckText.setText(R.string.correct);
                 }
                 else {
 
                     new android.os.CountDownTimer(1500, 1000) {
 
                         public void onTick(long millisUntilFinished) {
-                            editCheckText.setText("לא נכון, נסה שנית");
+                            editCheckText.setText(R.string.wrong);
                         }
                         public void onFinish() {
                             editCheckText.setText("");

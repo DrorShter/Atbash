@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">Atbash</string>
+    <string name="correct">"נכון מאוד"</string>
+    <string name="wrong">"לא נכון, נסה שנית"</string>
+    <string name="alef">"א"</string>
+    <string name="bet">"ב"</string>
+    <string name="gimel">"ג"</string>
+    <string name="dalet">"ד"</string>
+    <string name="hei">"ה"</string>
+    <string name="vav">"ו"</string>
+    <string name="zain">"ז"</string>
+    <string name="het">"ח"</string>
+    <string name="tet">"ט"</string>
+    <string name="yud">"י"</string>
+    <string name="caf">"כ"</string>
+    <string name="lamed">"ל"</string>
+    <string name="mem">"מ"</string>
+    <string name="nun">"נ"</string>
+    <string name="samech">"ס"</string>
+    <string name="ain">"ע"</string>
+    <string name="pei">"פ"</string>
+    <string name="tzadick">"צ"</string>
+    <string name="kuf">"ק"</string>
+    <string name="reish">"ר"</string>
+    <string name="shin">"ש"</string>
+    <string name="taf">"ת"</string>
+    <string name="nunSofit">"ן"</string>
+    <string name="memSofit">"ם"</string>
+    <string name="PeiSofit">"ף"</string>
+    <string name="cafSofit">"ך"</string>
+    <string name="tzadickSofit">"ץ"</string>
 </resources>
