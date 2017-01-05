@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         //Stage x = myDbHelper.getStage(1);
         //System.out.println(x.getAnswer());
     }
-    public void sendMessage(View view)
+    public void GoToStageActivity(View view)
     {
         Intent intent = new Intent(MainActivity.this, StageActivity.class);
         startActivity(intent);

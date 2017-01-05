@@ -26,7 +26,7 @@
     <string name="taf">"ת"</string>
     <string name="nunSofit">"ן"</string>
     <string name="memSofit">"ם"</string>
-    <string name="PeiSofit">"ף"</string>
+    <string name="peiSofit">"ף"</string>
     <string name="cafSofit">"ך"</string>
     <string name="tzadickSofit">"ץ"</string>
 </resources>

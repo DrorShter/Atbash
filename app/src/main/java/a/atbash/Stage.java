@@ -24,4 +24,5 @@ class Stage {
     {
         return this.clue;
     }
+    public int getNumber(){return this.number;}
 }

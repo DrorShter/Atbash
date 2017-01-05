@@ -86,14 +86,87 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <Button
+        android:text="חזור"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/BACK"
+        android:onClick="sendMessage"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="בדיקה"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkButton"
+        android:layout_above="@+id/editText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="19dp" />
+
+    <Button
+        android:text="רמז"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/clueButton"
+        android:layout_above="@+id/checkButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:maxLines="8"
+        android:lines="8"
+        android:id="@+id/question"
+        tools:height="200dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:layout_below="@+id/BACK"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/clue"
+        android:layout_alignEnd="@+id/clue"
+        android:layout_above="@+id/clue" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:maxLines="8"
+        android:lines = "8"
+        android:id="@+id/checkAns"
+        tools:height="200dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:layout_below="@+id/clue"
+        android:layout_alignRight="@+id/n25"
+        android:layout_alignEnd="@+id/n25"
+        android:layout_toRightOf="@+id/checkButton"
+        android:layout_toEndOf="@+id/checkButton"
+        android:layout_alignBottom="@+id/checkButton" />
+
+    <Button
+        android:text="רווח"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/n30"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/n28"
+        android:layout_alignEnd="@+id/n28" />
+
     <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation = "horizontal"
         android:columnCount="8"
         android:id="@+id/gridLayout"
-        android:layout_marginBottom="50dp"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/n30"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
@@ -266,79 +339,5 @@
             android:id = "@+id/n24"
             />
     </GridLayout>
-
-    <Button
-        android:text="חזור"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/BACK"
-        android:onClick="sendMessage"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:text="בדיקה"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkButton"
-        android:layout_above="@+id/editText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="19dp" />
-
-    <Button
-        android:text="רמז"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/clueButton"
-        android:layout_above="@+id/checkButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:maxLines="8"
-        android:lines="8"
-        android:id="@+id/question"
-        tools:height="200dp"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:layout_below="@+id/BACK"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/clue"
-        android:layout_alignEnd="@+id/clue"
-        android:layout_above="@+id/clue" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:maxLines="8"
-        android:lines = "8"
-        android:id="@+id/checkAns"
-        tools:height="200dp"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:layout_below="@+id/clue"
-        android:layout_alignRight="@+id/n25"
-        android:layout_alignEnd="@+id/n25"
-        android:layout_toRightOf="@+id/checkButton"
-        android:layout_toEndOf="@+id/checkButton"
-        android:layout_alignBottom="@+id/checkButton" />
-
-    <Button
-        android:text="רווח"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/n30"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/n28"
-        android:layout_alignEnd="@+id/n28" />
 
 </RelativeLayout>
