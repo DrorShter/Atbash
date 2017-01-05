@@ -60,24 +60,7 @@ public class StageActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        DataBase myDbHelper;
-        myDbHelper = new DataBase(this);
-        try
-        {
-            myDbHelper.createDataBase();
-        }
-        catch (IOException ioe)
-        {
-            throw new Error("Unable to create database");
-        }
-        try
-        {
-            myDbHelper.openDataBase();
-        }
-        catch (SQLException sqle)
-        {
-            throw new Error("fuck");
-        }
+        StageHandler stageHandler= new StageHandler();
         editText = (EditText)findViewById(R.id.editText);
         editCheckText =(EditText)findViewById(R.id.checkAns);
         editTextClue=(EditText)findViewById(R.id.clue);
@@ -116,10 +99,9 @@ public class StageActivity extends AppCompatActivity {
         bC = (Button)findViewById((R.id.checkButton));
         bClue = (Button)findViewById((R.id.clueButton));
         System.out.println("good");
-        final Stage x = myDbHelper.getStage(1);
+        final Stage x = stageHandler.getStage(1);
         System.out.println("good2");
         editTextQ.setText(x.getQuestion());
-        editTextClue.setText(x.getClue());
         b1.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -393,7 +375,6 @@ public class StageActivity extends AppCompatActivity {
                 editTextClue.setText(x.getClue());
             }
         });
-
     }
     public void sendMessage(View view)
     {

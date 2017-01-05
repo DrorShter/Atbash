@@ -105,29 +105,12 @@ public class DataBase extends SQLiteOpenHelper
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
-    {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
-    public Cursor x()
+    public Cursor rawQuery(String query)
     {
-        return myDataBase.rawQuery("SELECT * FROM Level", null);
-    }
-    public Cursor queryForStage(int num)
-    {
-        return myDataBase.rawQuery("SELECT * FROM Level where numberOfQuestion=="+num, null);
-    }
-    public Stage getStage(int numOfQuestion)
-    {
-        Cursor cur= myDataBase.rawQuery("SELECT * FROM Level", null);
-        cur.moveToFirst();
-        int number=cur.getInt(cur.getColumnIndex("NumberOfQuestion"));
-        System.out.println("number = " + number);
-        String Answer=cur.getString((cur.getColumnIndex("Answer")));
-        System.out.println("Answer = " + Answer);
-        String Question=cur.getString(cur.getColumnIndex("Question"));
-        String Hint=cur.getString(cur.getColumnIndex("Hint"));
-        Stage s=new Stage(number,Question,Hint,Answer);
-        return s;
+        Cursor cur= myDataBase.rawQuery(query, null);
+        return cur;
     }
 }
