@@ -10,8 +10,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.*;
+@lombok.Getter
+@lombok.Setter
 public class DataBase extends SQLiteOpenHelper
 {
+
     private static String DB_PATH = "/data/data/a.atbash/databases/"; //The Android's default system path of your application database.
     private static String DB_NAME = "AtbashClient";
     private SQLiteDatabase myDataBase;
@@ -108,6 +111,7 @@ public class DataBase extends SQLiteOpenHelper
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+
     public Cursor rawQuery(String query)
     {
         Cursor cur= myDataBase.rawQuery(query, null);

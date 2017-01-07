@@ -14,9 +14,9 @@ public class StageDAL
         {
             db.openDataBase();
         }
-        catch(SQLException blah)
+        catch(SQLException e)
         {
-            //stam
+            throw new Error("Failed in opening database");
         }
     }
     public Cursor queryCurrentLevel()

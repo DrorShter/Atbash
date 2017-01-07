@@ -1,5 +1,10 @@
 package a.atbash;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 class Stage {
     private int number;
     private String question;
@@ -12,17 +17,4 @@ class Stage {
         this.clue=clue;
         this.answer=answer;
     }
-    public String getQuestion()
-    {
-        return this.question;
-    }
-    public String getAnswer()
-    {
-        return this.answer;
-    }
-    public String getClue()
-    {
-        return this.clue;
-    }
-    public int getNumber(){return this.number;}
 }
