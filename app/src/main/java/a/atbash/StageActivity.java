@@ -69,8 +69,13 @@ public class StageActivity extends AppCompatActivity {
         b[29] = (Button)findViewById((R.id.n30));
         bC = (Button)findViewById((R.id.checkButton));
         bClue = (Button)findViewById((R.id.clueButton));
-        final Stage x = stageHandler.getStage(stageHandler.getLastLevel());
-        editTextQ.setText(x.getQuestion());
+        boolean ret = stageHandler.updateStagesFromServer();
+        if (!ret)
+        {
+            System.out.println("offline mode");
+        }
+        //final Stage x = stageHandler.getStage(stageHandler.getLastLevel());
+        //editTextQ.setText(x.getQuestion());
         b[0].setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -193,11 +198,11 @@ public class StageActivity extends AppCompatActivity {
         });
         b[15].setOnClickListener(new View.OnClickListener()
         {
-        @Override
-        public void onClick(View v)
-        {
-            editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.lamed)));
-        }
+            @Override
+            public void onClick(View v)
+            {
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.lamed)));
+            }
         });
         b[16].setOnClickListener(new View.OnClickListener()
         {
@@ -352,4 +357,3 @@ public class StageActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
-

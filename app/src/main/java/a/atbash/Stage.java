@@ -17,4 +17,8 @@ class Stage {
         this.clue=clue;
         this.answer=answer;
     }
+    public Stage()
+    {
+
+    }
 }

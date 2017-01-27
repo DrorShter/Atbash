@@ -35,7 +35,7 @@ public class DataBase extends SQLiteOpenHelper
         }
         else
         {
-            this.getReadableDatabase();
+            //this.getReadableDatabase();
             try
             {
                 copyDataBase();
