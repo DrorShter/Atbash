@@ -20,7 +20,7 @@ public class DataBase {
             throw new RuntimeException("Failed to register SQLDroidDriver");
         }
         connection = DriverManager.getConnection("jdbc:sqldroid:" + "/data/data/a.atbash/AtbashClient1.db");
-        //"jdbc:sqlite:/data/data/a.atbash/databases/AtbashClient"
+        //"jdbc:sqlite:/data/data/a.atbash/databases/AtbashClient1"
     }
 
     public ResultSet ex(String s) throws SQLException {
