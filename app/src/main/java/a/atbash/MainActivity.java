@@ -1,15 +1,15 @@
 package a.atbash;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import org.apache.commons.io.IOUtils;
+
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class MainActivity extends AppCompatActivity {
     Button b;
@@ -19,11 +19,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         b = (Button)findViewById((R.id.button));
+        b.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                GoToStageActivity(v);
+            }
+        });
+        try {
+            IOUtils.copy(getAssets().open("AtbashClient1.db"), new FileOutputStream(getFilesDir()+"/AtbashClient2.db"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("jdbc:sqlite:"+getFilesDir()+"/test.db");
 
-
-        System.out.println("hi");
-        //Stage x = myDbHelper.getStage(1);
-        //System.out.println(x.getAnswer());
     }
     public void GoToStageActivity(View view)
     {

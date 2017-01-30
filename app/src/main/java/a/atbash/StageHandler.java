@@ -1,35 +1,31 @@
 package a.atbash;
 
-import android.database.Cursor;
-import android.provider.ContactsContract;
-
 import java.sql.SQLException;
 
 public class StageHandler {
+    public StageHandler() throws SQLException, ClassNotFoundException {
+    }
+
     private StageDAL stageDAL=new StageDAL();
-    public Stage getStage(int numOfQuestion)
-    {
-        Cursor cur = stageDAL.queryForStage(numOfQuestion);
-        cur.moveToFirst();
-        int number=cur.getInt(cur.getColumnIndex("NumberOfQuestion"));
-        String Answer=cur.getString((cur.getColumnIndex("Answer")));
-        String Question=cur.getString(cur.getColumnIndex("Question"));
-        String Hint=cur.getString(cur.getColumnIndex("Hint"));
-        Stage s=new Stage(number,Question,Hint,Answer);
+
+    public Stage getStage(int numOfQuestion) throws SQLException {
+        Stage s=stageDAL.getStage(numOfQuestion);
         return s;
     }
-    public int getLastLevel()
-    {
-        Cursor cur = stageDAL.queryCurrentLevel();
-        int last=cur.getInt(cur.getColumnIndex("last"));
+    public int getLastLevel(){
+        int last= 0;
+        try {
+            last = stageDAL.getCurrentLevel();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return last;
     }
-    public void updateLastLevel(int curLevel)
-    {
+    public void updateLastLevel(int curLevel) throws SQLException {
         int curLast=getLastLevel();
         if(curLast<curLevel)
         {
-            stageDAL.queryForUpdateLast(curLevel);
+            stageDAL.updateLastLevel(curLevel);
         }
     }
 }
