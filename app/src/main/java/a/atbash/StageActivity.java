@@ -29,6 +29,7 @@ public class StageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         try {
             stageHandler= new StageHandler();
+            stageHandler.updateStagesFromServer();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
