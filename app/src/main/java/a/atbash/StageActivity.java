@@ -1,7 +1,9 @@
 package a.atbash;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +14,7 @@ import java.sql.SQLException;
 
 public class StageActivity extends AppCompatActivity {
    // DataBase dataBase=new DataBase(this);
-    Stage x=new Stage();
+    Stage thisStage = new Stage();
     EditText editText;
     EditText editCheckText;
     EditText editTextClue;
@@ -27,20 +29,18 @@ public class StageActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        try {
-            stageHandler= new StageHandler();
-            stageHandler.updateStagesFromServer();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
+        Intent i = getIntent();
+        stageHandler = new StageHandler();
         editText = (EditText)findViewById(R.id.editText);
         editCheckText =(EditText)findViewById(R.id.checkAns);
         editTextClue=(EditText)findViewById(R.id.clue);
         editTextQ=(EditText)findViewById(R.id.question);
         back = (Button)findViewById(R.id.BACK);
+        try {
+            thisStage = stageHandler.getStage(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         Button[] b = new Button[30];
         b[0] = (Button)findViewById((R.id.n1));
         b[1] = (Button)findViewById((R.id.n2));
@@ -74,14 +74,7 @@ public class StageActivity extends AppCompatActivity {
         b[29] = (Button)findViewById((R.id.n30));
         bC = (Button)findViewById((R.id.checkButton));
         bClue = (Button)findViewById((R.id.clueButton));
-        Stage temp=new Stage();
-        try {
-            temp = stageHandler.getStage(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        final Stage x=temp;
-        editTextQ.setText(x.getQuestion());
+        editTextQ.setText(thisStage.getQuestion());
         b[0].setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -329,13 +322,25 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                if((editText.getText().toString()).equals(x.getAnswer()))
+                if((editText.getText().toString()).equals(thisStage.getAnswer()))
                 {
                     editCheckText.setText(R.string.correct);
                     try {
-                        stageHandler.updateLastLevel(x.getNumber());
+                        stageHandler.updateLastLevel(thisStage.getNumber());
                     } catch (SQLException e) {
                         e.printStackTrace();
+                    }
+                    thisStage = stageHandler.getNextStage(thisStage.getNumber());
+                    if (thisStage != null)
+                    {
+                        editTextQ.setText(thisStage.getQuestion());
+                        editTextClue.setText("");
+                        editCheckText.setText("");
+                        editText.setText("");
+                    }
+                    else
+                    {
+                        System.out.println("End of Stages");
                     }
                 }
                 else {
@@ -357,8 +362,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                System.out.println(x.getClue());
-                editTextClue.setText(x.getClue());
+                editTextClue.setText(thisStage.getClue());
             }
         });
     }

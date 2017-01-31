@@ -1,6 +1,7 @@
 package a.atbash;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,9 +11,11 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class MainActivity extends AppCompatActivity {
     Button b;
+    private StageHandler stageHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

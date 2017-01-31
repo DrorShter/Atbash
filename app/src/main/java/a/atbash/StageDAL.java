@@ -49,7 +49,7 @@ public class StageDAL extends Application
         int last=Integer.parseInt(resultSet.getString("last"));
         return last;
         */
-        return 0; //just for not exception - noam
+        return 1; //just for not exception - noam
     }
     public Stage getStage(int num) throws SQLException {
         /*
@@ -62,7 +62,17 @@ public class StageDAL extends Application
         clue=resultSet.getString("Clue");
         return new Stage(num, question, clue, answer);
         */
-        return new Stage(1, "א", "ב", "ג"); //just for not compilation error - noam
+        Stage ret = null;
+        switch (num)
+        {
+            case 1: ret = new Stage(1, "א", "ב", "ג");
+                break;
+            case 2: ret = new Stage(2, "מ", "נ", "ס");
+                break;
+            case 3: ret = new Stage(3, "ק", "ר", "ש");
+                break;
+        }
+        return ret;
     }
     public void updateLastLevel(int curLevel) throws SQLException {
         /*

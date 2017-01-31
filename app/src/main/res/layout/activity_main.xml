@@ -33,7 +33,7 @@
         android:text = "ך"
         android:id = "@+id/n25"
         android:layout_marginBottom="40dp"
-        android:layout_marginLeft="253dp"
+        android:layout_marginLeft="269dp"
         android:layout_alignBottom="@+id/gridLayout"
         />
 
@@ -43,7 +43,7 @@
         android:text = "ץ"
         android:id = "@+id/n26"
         android:layout_marginBottom="0dp"
-        android:layout_marginLeft="253dp"
+        android:layout_marginLeft="269dp"
         android:layout_alignBottom="@+id/gridLayout"/>
 
     <Button
@@ -52,7 +52,7 @@
         android:text = "ף"
         android:id = "@+id/n27"
         android:layout_marginBottom="40dp"
-        android:layout_marginLeft="285dp"
+        android:layout_marginLeft="302dp"
         android:layout_alignBottom="@+id/gridLayout"
         />
     <Button
@@ -61,16 +61,16 @@
         android:text = "."
         android:id = "@+id/n28"
         android:layout_marginBottom="0dp"
-        android:layout_marginLeft="285dp"
+        android:layout_marginLeft="301dp"
         android:layout_alignBottom="@+id/gridLayout"
         />
     <Button
-        android:layout_width="70dp"
+        android:layout_width="71dp"
         android:layout_height= "40dp"
         android:text = "->"
         android:id = "@+id/n29"
         android:layout_marginBottom="80dp"
-        android:layout_marginLeft="253dp"
+        android:layout_marginLeft="269dp"
         android:layout_alignBottom="@+id/gridLayout"
         />
 
@@ -149,17 +149,6 @@
         android:layout_toEndOf="@+id/checkButton"
         android:layout_alignBottom="@+id/checkButton" />
 
-    <Button
-        android:text="רווח"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/n30"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/n28"
-        android:layout_alignEnd="@+id/n28" />
-
     <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -174,7 +163,7 @@
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "ק"
-            android:layout_marginLeft="-6dp"
+            android:layout_marginLeft="9dp"
             android:id = "@+id/n1"
             />
         <Button
@@ -230,7 +219,7 @@
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "ש"
-            android:layout_marginLeft="-6dp"
+            android:layout_marginLeft="9dp"
             android:id = "@+id/n9"
             />
         <Button
@@ -286,7 +275,7 @@
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "ז"
-            android:layout_marginLeft="-6dp"
+            android:layout_marginLeft="9dp"
             android:id = "@+id/n17"
             />
         <Button
@@ -339,5 +328,14 @@
             android:id = "@+id/n24"
             />
     </GridLayout>
+
+    <Button
+        android:text="רווח"
+        android:layout_width="330dp"
+        android:layout_height="50dp"
+        android:id="@+id/n30"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/n27"
+        android:layout_alignEnd="@+id/n27" />
 
 </RelativeLayout>

@@ -1,5 +1,6 @@
 package a.atbash;
 
+import java.io.Serializable;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
@@ -8,9 +9,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class StageHandler {
-    public StageHandler() throws SQLException, ClassNotFoundException{
-    }
+    public StageHandler()
+    {
 
+    }
     private StageDAL stageDAL = new StageDAL();
 
     public Stage getStage(int numOfQuestion) throws SQLException {
@@ -19,13 +21,14 @@ public class StageHandler {
     }
 
     public int getLastLevel() {
-        int last = 0;
+        int last = 3;
         try {
             last = stageDAL.getCurrentLevel();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return last;
+        //return last;
+        return 3; // just for check, should return last
     }
 
     public void updateLastLevel(int curLevel) throws SQLException {
@@ -65,5 +68,18 @@ public class StageHandler {
             ret = false;
         }
         return ret;
+    }
+
+    public Stage getNextStage(int thisStage)
+    {
+        if (thisStage < getLastLevel())
+        {
+            try {
+                return getStage(thisStage + 1);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 }
