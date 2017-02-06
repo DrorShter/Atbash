@@ -1,9 +1,7 @@
 package a.atbash;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -333,10 +331,7 @@ public class StageActivity extends AppCompatActivity {
                     thisStage = stageHandler.getNextStage(thisStage.getNumber());
                     if (thisStage != null)
                     {
-                        editTextQ.setText(thisStage.getQuestion());
-                        editTextClue.setText("");
-                        editCheckText.setText("");
-                        editText.setText("");
+                        timeout(true);
                     }
                     else
                     {
@@ -345,15 +340,7 @@ public class StageActivity extends AppCompatActivity {
                 }
                 else {
 
-                    new android.os.CountDownTimer(1500, 1000) {
-
-                        public void onTick(long millisUntilFinished) {
-                            editCheckText.setText(R.string.wrong);
-                        }
-                        public void onFinish() {
-                            editCheckText.setText("");
-                        }
-                    }.start();
+                    timeout(false);
                 }
             }
         });
@@ -365,6 +352,30 @@ public class StageActivity extends AppCompatActivity {
                 editTextClue.setText(thisStage.getClue());
             }
         });
+    }
+    private void order() {
+        editTextQ.setText(thisStage.getQuestion());
+        editTextClue.setText("");
+        editCheckText.setText("");
+        editText.setText("");
+    }
+    private void timeout(final boolean a)
+    {
+        new android.os.CountDownTimer(1500, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                if(a==false)
+                    editCheckText.setText(R.string.wrong);
+                else
+                {
+                    editCheckText.setText(R.string.correct);
+                    order();
+                }
+            }
+            public void onFinish() {
+                editCheckText.setText("");
+            }
+        }.start();
     }
     public void GoToMainActivity(View view)
     {

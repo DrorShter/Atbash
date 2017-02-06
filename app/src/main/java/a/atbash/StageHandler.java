@@ -1,19 +1,18 @@
 package a.atbash;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class StageHandler {
     public StageHandler()
     {
 
     }
-    private StageDAL stageDAL = new StageDAL();
+    private ForServer stageDAL = new ForServer();
 
     public Stage getStage(int numOfQuestion) throws SQLException {
         Stage s = stageDAL.getStage(numOfQuestion);

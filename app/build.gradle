@@ -32,13 +32,13 @@ android {
         compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.16.1'
         //compile 'org.sqldroid:sqldroid:1.0.3'
         compile group: 'org.apache.commons', name: 'commons-io', version: '1.3.2'
-        packagingOptions {
-                    exclude 'META-INF/ASL2.0'
-                    exclude 'META-INF/LICENSE'
-                    exclude 'META-INF/NOTICE'
-                    exclude 'META-INF/NOTICE.txt'
-                    exclude 'META-INF/LICENSE.txt'
-                    exclude 'META-INF/MANIFEST.MF'
-                }
+    }
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/MANIFEST.MF'
     }
 }
