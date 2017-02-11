@@ -35,6 +35,7 @@ public class StageActivity extends AppCompatActivity {
     private PopupWindow popUpWindow;
     private LayoutInflater layoutInflater;
     private RelativeLayout relativeLayout;
+    private int stageNumber;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -42,6 +43,7 @@ public class StageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Intent i = getIntent();
         stageHandler = new StageHandler();
+        stageNumber = i.getIntExtra("Stage", stageHandler.getLastLevel()); //get the number of stage from previous stages activity or default - database
         editText = (EditText)findViewById(R.id.editText);
         editCheckText =(EditText)findViewById(R.id.checkAns);
         editTextClue=(EditText)findViewById(R.id.clue);
@@ -49,7 +51,7 @@ public class StageActivity extends AppCompatActivity {
         back = (Button)findViewById(R.id.BACK);
         relativeLayout = (RelativeLayout) findViewById(R.id.activity_main);
         try {
-            thisStage = stageHandler.getStage(1);
+            thisStage = stageHandler.getStage(stageNumber);
         } catch (SQLException e) {
             e.printStackTrace();
         }
