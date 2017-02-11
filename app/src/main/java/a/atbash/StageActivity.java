@@ -5,15 +5,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 
 import java.sql.SQLException;
 
 public class StageActivity extends AppCompatActivity {
-   // DataBase dataBase=new DataBase(this);
+    // DataBase dataBase=new DataBase(this);
     Stage thisStage = new Stage();
     EditText editText;
     EditText editCheckText;
@@ -24,6 +32,9 @@ public class StageActivity extends AppCompatActivity {
     Button back;
     StageHandler stageHandler;
     GridLayout gridLayout;
+    private PopupWindow popUpWindow;
+    private LayoutInflater layoutInflater;
+    private RelativeLayout relativeLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -36,6 +47,7 @@ public class StageActivity extends AppCompatActivity {
         editTextClue=(EditText)findViewById(R.id.clue);
         editTextQ=(EditText)findViewById(R.id.question);
         back = (Button)findViewById(R.id.BACK);
+        relativeLayout = (RelativeLayout) findViewById(R.id.activity_main);
         try {
             thisStage = stageHandler.getStage(1);
         } catch (SQLException e) {
@@ -197,11 +209,11 @@ public class StageActivity extends AppCompatActivity {
         });
         b[15].setOnClickListener(new View.OnClickListener()
         {
-        @Override
-        public void onClick(View v)
-        {
-            editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.lamed)));
-        }
+            @Override
+            public void onClick(View v)
+            {
+                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.lamed)));
+            }
         });
         b[16].setOnClickListener(new View.OnClickListener()
         {
@@ -324,7 +336,19 @@ public class StageActivity extends AppCompatActivity {
             {
                 if((editText.getText().toString()).equals(thisStage.getAnswer()))
                 {
-                    editCheckText.setText(R.string.correct);
+                    layoutInflater =(LayoutInflater) getApplicationContext().getSystemService( LAYOUT_INFLATER_SERVICE);
+                    ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.popup, null);
+                    popUpWindow = new PopupWindow(container,800,600, true);
+                    popUpWindow.showAtLocation(relativeLayout, Gravity.NO_GRAVITY, 100,600);
+                    container.setOnTouchListener(new View.OnTouchListener()
+                    {
+                        @Override
+                        public boolean onTouch(View view, MotionEvent motionEvent)
+                        {
+                            popUpWindow.dismiss();
+                            return true;
+                        }
+                    });
                     try {
                         stageHandler.updateLastLevel(thisStage.getNumber());
                     } catch (SQLException e) {
@@ -372,4 +396,3 @@ public class StageActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
-
