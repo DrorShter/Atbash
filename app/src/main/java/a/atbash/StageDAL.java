@@ -98,5 +98,6 @@ public class StageDAL extends Application
         System.out.println(list.get(2).getQuestion());
         System.out.println(list.get(2).getAnswer());
         //work for dror
+        //check
     }
 }
