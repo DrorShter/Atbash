@@ -14,11 +14,11 @@ import android.widget.GridView;
 public class PreviousStagesActivity extends AppCompatActivity
 {
     private int page = 1;
-    private int thisButtonNumber = 1;
+    private int currButtonNumber = 1;
     private StageHandler stageHandler = new StageHandler();
     private int lastLevel = stageHandler.getLastLevel(); //last level the user succeeded
-    private int numberOfStagesInPage = 20;
-    private int LevelCount = 44; //should be from db
+    private final int NUMBER_OF_STAGES_IN_PAGE = 18;
+    private int levelCount = 44; //TODO: should be from db
     private Button backpage;
     private Button nextpage;
     public class ButtonAdapter  extends BaseAdapter {
@@ -32,13 +32,13 @@ public class PreviousStagesActivity extends AppCompatActivity
 
         public int getCount()
         {
-            if (page == ((LevelCount-1) / 20) + 1) //if last page
+            if (page == getLastPage(levelCount)) //if last page
             {
-                return LevelCount%numberOfStagesInPage;
+                return levelCount%NUMBER_OF_STAGES_IN_PAGE;
             }
             else
             {
-                return numberOfStagesInPage;
+                return NUMBER_OF_STAGES_IN_PAGE;
             }
         }
 
@@ -58,13 +58,10 @@ public class PreviousStagesActivity extends AppCompatActivity
                 button = new ButtonViewItem(mContext);
                 button.setLayoutParams(new GridView.LayoutParams(200, 100));
                 button.setPadding(1, 1, 1, 1);
-                button.setNumber(thisButtonNumber);
-                thisButtonNumber++;
+                button.setNumber(currButtonNumber);
+                currButtonNumber++;
                 button.setText(Integer.toString(button.getNumber()));
-                if (lastLevel < button.getNumber())
-                {
-                    button.setEnabled(false);
-                }
+                button.setEnabled(lastLevel >= button.getNumber());
                 button.setOnClickListener(new View.OnClickListener()
                 {
                     @Override
@@ -81,12 +78,11 @@ public class PreviousStagesActivity extends AppCompatActivity
             }
             nextpage.setVisibility(View.VISIBLE);
             backpage.setVisibility(View.VISIBLE);
-            System.out.println("page = " + page);
             if (page == 1) //if first page
             {
                backpage.setVisibility(View.INVISIBLE);
             }
-            if (page == ((LevelCount-1) / 20) + 1) //if last page
+            if (page == getLastPage(levelCount)) //if last page
             {
                 nextpage.setVisibility(View.INVISIBLE);
             }
@@ -96,7 +92,7 @@ public class PreviousStagesActivity extends AppCompatActivity
     public void goToNextPage(View view)
     {
         page++;
-        thisButtonNumber = 1 + (page-1)*20;
+        currButtonNumber = firstButtonOfPage(page);
         GridView gridview = (GridView) findViewById(R.id.gridview);
         ButtonAdapter buttonAdapter = new ButtonAdapter(this);
         gridview.setAdapter(buttonAdapter);
@@ -104,7 +100,7 @@ public class PreviousStagesActivity extends AppCompatActivity
     public void goToBackPage(View view)
     {
         page--;
-        thisButtonNumber = 1 + (page-1)*20;
+        currButtonNumber = firstButtonOfPage(page);
         GridView gridview = (GridView) findViewById(R.id.gridview);
         ButtonAdapter buttonAdapter = new ButtonAdapter(this);
         gridview.setAdapter(buttonAdapter);
@@ -116,6 +112,14 @@ public class PreviousStagesActivity extends AppCompatActivity
          GridView gridview = (GridView) findViewById(R.id.gridview);
          ButtonAdapter buttonAdapter = new ButtonAdapter(this);
          gridview.setAdapter(buttonAdapter);
+    }
+    private int firstButtonOfPage (int page)
+    {
+        return  1 + (page-1)*NUMBER_OF_STAGES_IN_PAGE;
+    }
+    private int getLastPage (int levelCount)
+    {
+        return ((levelCount-1) / NUMBER_OF_STAGES_IN_PAGE) + 1;
     }
     public void GoToMainActivity(View view)
     {
