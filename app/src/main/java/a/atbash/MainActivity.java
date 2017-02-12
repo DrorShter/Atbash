@@ -43,4 +43,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, StageActivity.class);
         startActivity(intent);
     }
+    public void GoToPreviousStagesActivity(View view)
+    {
+        Intent intent = new Intent(MainActivity.this, PreviousStagesActivity.class);
+        startActivity(intent);
+    }
 }

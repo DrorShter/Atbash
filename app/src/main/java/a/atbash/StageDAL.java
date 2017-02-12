@@ -1,96 +1,102 @@
 package a.atbash;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import android.app.Application;
+
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-@lombok.Getter
-@lombok.Setter
-public class StageDAL extends SQLiteOpenHelper {
+import java.util.List;
 
-    private static String DB_PATH = "/data/data/a.atbash/databases/"; //The Android's default system path of your application database.
-    private static String DB_NAME = "AtbashClient";
-    private SQLiteDatabase myDataBase;
-    private final Context myContext;
+public class StageDAL extends Application
+{
+    private Connection connection = null;
+    private ResultSet resultSet;
+    private PreparedStatement preparedStatement = null;
 
-    //constructor
-    public StageDAL(Context context) {
-
-        super(context, DB_NAME, null, 1);
-        this.myContext = context;
+    private Connection getConnection() {
+        Connection con=null;
+        //Context context = getApplicationContext();
+        /*
+        String name = "AtbashClient2.db";
+        String DB_PATH = "/data/user/0/a.atbash/files/";
+        System.out.println(DB_PATH+name);
         try {
-            copyDataBase();
-            openDataBase();
+            DriverManager.registerDriver((Driver) Class.forName("org.sqlite.JDBC").newInstance());
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to register SQLDroidDriver");
+        }
+        try {
+            con = DriverManager.getConnection("jdbc:sqlite:" +DB_PATH+ "/AtbashClient2.db");
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+        */
+        return con;
     }
-
-    //copy database from assets to local database
-    private void copyDataBase() throws IOException {
-        InputStream myInput = myContext.getAssets().open(DB_NAME);
-        String outFileName = DB_PATH + DB_NAME;
-        OutputStream myOutput = new FileOutputStream(outFileName);
-        byte[] buffer = new byte[1024];
-        int length;
-        while ((length = myInput.read(buffer)) > 0) {
-            myOutput.write(buffer, 0, length);
-        }
-        //Close the streams
-        myOutput.flush();
-        myOutput.close();
-        myInput.close();
-    }
-
-    //open database
-    public void openDataBase() throws SQLException {
-        String myPath = DB_PATH + DB_NAME;
-        System.out.println(myPath);
-        myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
-
-    }
-
-    //close database
-    @Override
-    public synchronized void close() {
-        if (myDataBase != null)
-            myDataBase.close();
-        super.close();
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+    public StageDAL()
+    {
+        connection=getConnection();
     }
 
     public int getCurrentLevel() throws SQLException {
-        String query = "SELECT * FROM lastLevel";
-        Cursor cur = myDataBase.rawQuery(query, null);
-        String last = cur.getString(cur.getColumnIndex("last"));
-        int lastNum = Integer.getInteger(last);
-        return lastNum;
+        /*
+        String query="SELECT * FROM lastLevel";
+        preparedStatement=connection.prepareStatement(query);
+        resultSet=preparedStatement.executeQuery();
+        int last=Integer.parseInt(resultSet.getString("last"));
+        return last;
+        */
+        return 1; //just for not exception - noam
     }
-
-
     public Stage getStage(int num) throws SQLException {
-        String question, answer, clue, query = "SELECT * FROM Level WHERE NumberOfQuestion=" + num;
-        Cursor cur = myDataBase.rawQuery(query, null);
-        clue = cur.getString(cur.getColumnIndex("clue"));
-        question = cur.getString(cur.getColumnIndex("Question"));
-        answer = cur.getString(cur.getColumnIndex("Answer"));
-        Stage s = new Stage(num, question, clue, answer);
-        return s;
+        /*
+        String question, answer, clue, query="SELECT * FROM Level WHERE NumberOfQuestion=?";
+        preparedStatement=connection.prepareStatement(query);
+        preparedStatement.setInt(1, num);
+        resultSet= preparedStatement.executeQuery();
+        question=resultSet.getString("Question");
+        answer=resultSet.getString("Answer");
+        clue=resultSet.getString("Clue");
+        return new Stage(num, question, clue, answer);
+        */
+        Stage ret = null;
+        switch (num)
+        {
+            case 1: ret = new Stage(1, "א", "ב", "ג");
+                break;
+            case 2: ret = new Stage(2, "מ", "נ", "ס");
+                break;
+            case 3: ret = new Stage(3, "ק", "ר", "ש");
+                break;
+        }
+        return ret;
+    }
+    public void updateLastLevel(int curLevel) throws SQLException {
+        /*
+        String query="UPDATE lastLevel set last=?";
+        preparedStatement=connection.prepareStatement(query);
+        preparedStatement.setInt(1, curLevel);
+        preparedStatement.executeQuery();
+        */
+    }
+    public void updateStagesFromServer(List <Stage> list)
+    {
+        System.out.println("from server");
+        System.out.println(list.get(0).getNumber());
+        System.out.println(list.get(0).getQuestion());
+        System.out.println(list.get(0).getClue());
+        System.out.println(list.get(0).getAnswer());
+        System.out.println(list.get(1).getNumber());
+        System.out.println(list.get(1).getQuestion());
+        System.out.println(list.get(1).getClue());
+        System.out.println(list.get(1).getAnswer());
+        System.out.println(list.get(2).getNumber());
+        System.out.println(list.get(2).getClue());
+        System.out.println(list.get(2).getQuestion());
+        System.out.println(list.get(2).getAnswer());
+        //work for dror
     }
 }

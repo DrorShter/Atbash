@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".StageActivity"></activity>
+        <activity android:name=".PreviousStagesActivity"></activity>
     </application>
 
 </manifest>
