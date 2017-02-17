@@ -29,4 +29,17 @@
     <string name="peiSofit">"ף"</string>
     <string name="cafSofit">"ך"</string>
     <string name="tzadickSofit">"ץ"</string>
+    <string name="successInStage1">"תותח!!!"</string>
+    <string name="successInStage2">"מלך!!!"</string>
+    <string name="successInStage3">"כלי!!!"</string>
+    <string name="nextStage">"לשאלה הבאה"</string>
+    <string name="finsihedAllLevels">"כל הכבוד! השלמת את כל השלבים. בקרוב נוסיף שלבים חדשים."</string>
+    <string name="backToMainMenuAfterFinishAllLevels">"בחזרה לתפריט  הראשי"</string>
+    <string name="facebook_app_id">1876071789305774</string>
+    <string name="fb_login_protocol_scheme">fbAPP_ID</string>
+    <string name="fb_share_button">fbAPP_ID</string>
+    <string name="shareInFacebook">שתף עם חבריך בפייסבוק</string>
+    <string name="shareTitle">שיתוף תוצאה בAtbash</string>
+    <string name="shareMessage1">עברתי בהצלחה את שלב</string>
+    <string name="shareMessage2"> !\n הצטרפו גם אתם לפתרון חידות ההצפנה!</string>
 </resources>

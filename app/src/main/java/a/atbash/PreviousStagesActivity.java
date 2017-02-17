@@ -4,28 +4,28 @@ package a.atbash;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.GridView;
+import android.widget.Toast;
 
 public class PreviousStagesActivity extends AppCompatActivity
 {
     private int page = 1;
-    private int currButtonNumber = 1;
     private StageHandler stageHandler = new StageHandler();
     private int lastLevel = stageHandler.getLastLevel(); //last level the user succeeded
-    private final int NUMBER_OF_STAGES_IN_PAGE = 18;
+    private final int NUMBER_OF_STAGES_IN_PAGE = 20;
     private int levelCount = 44; //TODO: should be from db
-    private Button backpage;
-    private Button nextpage;
     public class ButtonAdapter  extends BaseAdapter {
 
         private Context mContext;
 
-        private boolean check;
         public ButtonAdapter(Context c) {
             mContext = c;
         }
@@ -52,30 +52,25 @@ public class PreviousStagesActivity extends AppCompatActivity
 
         public View getView(int position, View convertView, ViewGroup parent) {
             final ButtonViewItem button;
-            nextpage = (Button) findViewById(R.id.nextPage);
-            backpage = (Button) findViewById(R.id.backPage);
-            if (convertView == null) {
-                button = new ButtonViewItem(mContext);
-                button.setLayoutParams(new GridView.LayoutParams(200, 100));
-                button.setPadding(1, 1, 1, 1);
-                button.setNumber(currButtonNumber);
-                currButtonNumber++;
-                button.setText(Integer.toString(button.getNumber()));
-                button.setEnabled(lastLevel >= button.getNumber());
-                button.setOnClickListener(new View.OnClickListener()
+            Button nextpage = (Button) findViewById(R.id.nextPage);
+            Button backpage = (Button) findViewById(R.id.backPage);
+            button = new ButtonViewItem(mContext);
+            button.setLayoutParams(new GridView.LayoutParams(200, 100));
+            button.setPadding(1, 1, 1, 1);
+            button.setNumber(firstButtonOfPage(page) + position);
+            button.setText(Integer.toString(button.getNumber()));
+            button.setEnabled(lastLevel >= button.getNumber());
+            button.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
                 {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        Intent i = new Intent(PreviousStagesActivity.this, StageActivity.class);
-                        System.out.println(Integer.toString(button.getNumber()));
-                        i.putExtra("Stage", button.getNumber());
-                        PreviousStagesActivity.this.startActivity(i);
-                    }
-                });
-            } else {
-                button = (ButtonViewItem) convertView;
-            }
+                    Intent i = new Intent(PreviousStagesActivity.this, StageActivity.class);
+                    System.out.println(Integer.toString(button.getNumber()));
+                    i.putExtra("Stage", button.getNumber());
+                    PreviousStagesActivity.this.startActivity(i);
+                }
+            });
             nextpage.setVisibility(View.VISIBLE);
             backpage.setVisibility(View.VISIBLE);
             if (page == 1) //if first page
@@ -92,7 +87,6 @@ public class PreviousStagesActivity extends AppCompatActivity
     public void goToNextPage(View view)
     {
         page++;
-        currButtonNumber = firstButtonOfPage(page);
         GridView gridview = (GridView) findViewById(R.id.gridview);
         ButtonAdapter buttonAdapter = new ButtonAdapter(this);
         gridview.setAdapter(buttonAdapter);
@@ -100,7 +94,6 @@ public class PreviousStagesActivity extends AppCompatActivity
     public void goToBackPage(View view)
     {
         page--;
-        currButtonNumber = firstButtonOfPage(page);
         GridView gridview = (GridView) findViewById(R.id.gridview);
         ButtonAdapter buttonAdapter = new ButtonAdapter(this);
         gridview.setAdapter(buttonAdapter);

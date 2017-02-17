@@ -1,7 +1,9 @@
 package a.atbash;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +20,17 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.share.ShareApi;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
+
 import java.sql.SQLException;
+import java.util.Random;
 
 public class StageActivity extends AppCompatActivity {
     // DataBase dataBase=new DataBase(this);
@@ -32,10 +44,15 @@ public class StageActivity extends AppCompatActivity {
     Button back;
     StageHandler stageHandler;
     GridLayout gridLayout;
+    FacebookCallback facebookCallback;
     private PopupWindow popUpWindow;
     private LayoutInflater layoutInflater;
     private RelativeLayout relativeLayout;
+
     private int stageNumber;
+    private final int SUCCESS = 0;
+    private final int NO_MORE_STAGES = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -338,27 +355,16 @@ public class StageActivity extends AppCompatActivity {
             {
                 if((editText.getText().toString()).equals(thisStage.getAnswer()))
                 {
-                    layoutInflater =(LayoutInflater) getApplicationContext().getSystemService( LAYOUT_INFLATER_SERVICE);
-                    ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.popup, null);
-                    popUpWindow = new PopupWindow(container,800,600, true);
-                    popUpWindow.showAtLocation(relativeLayout, Gravity.NO_GRAVITY, 100,600);
-                    container.setOnTouchListener(new View.OnTouchListener()
-                    {
-                        @Override
-                        public boolean onTouch(View view, MotionEvent motionEvent)
-                        {
-                            popUpWindow.dismiss();
-                            return true;
-                        }
-                    });
                     try {
                         stageHandler.updateLastLevel(thisStage.getNumber());
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
-                    thisStage = stageHandler.getNextStage(thisStage.getNumber());
-                    if (thisStage != null)
+                    Stage temp  = stageHandler.getNextStage(thisStage.getNumber());
+                    if (temp != null)
                     {
+                        dialogManager(SUCCESS);
+                        thisStage = temp;
                         editTextQ.setText(thisStage.getQuestion());
                         editTextClue.setText("");
                         editCheckText.setText("");
@@ -366,7 +372,7 @@ public class StageActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        System.out.println("End of Stages");
+                        dialogManager(NO_MORE_STAGES);
                     }
                 }
                 else {
@@ -391,10 +397,86 @@ public class StageActivity extends AppCompatActivity {
                 editTextClue.setText(thisStage.getClue());
             }
         });
+        facebookCallback = new FacebookCallback() {
+            @Override
+            public void onSuccess(Object o) {
+
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        };
     }
     public void GoToMainActivity(View view)
     {
         Intent intent = new Intent(StageActivity.this, MainActivity.class);
         startActivity(intent);
     }
+    public void dialogManager(int option)
+    {
+        String alertText = "", positiveButtonText = "", negativeButtonText = "";
+        DialogInterface.OnClickListener positiveDialogInterface = null, negativeDialogInterface = null;
+        switch (option) {
+            case SUCCESS:
+                Random rand = new Random();
+                int n = rand.nextInt(3) + 1;
+                switch (n)
+                {
+                    case 1:
+                        alertText = getString(R.string.successInStage1);
+                        break;
+                    case 2:
+                        alertText = getString(R.string.successInStage2);
+                        break;
+                    case 3:
+                        alertText = getString(R.string.successInStage3);
+                        break;
+                }
+                positiveButtonText = getString(R.string.nextStage);
+                negativeButtonText = getString(R.string.shareInFacebook);
+                break;
+            case NO_MORE_STAGES:
+                alertText = getString(R.string.finsihedAllLevels);
+                positiveButtonText = getString(R.string.backToMainMenuAfterFinishAllLevels);
+                negativeButtonText = getString(R.string.shareInFacebook);
+                positiveDialogInterface = new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int id)
+                    {
+                        Intent intent = new Intent(StageActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                };
+                break;
+        }
+        negativeDialogInterface = new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int id)
+            {
+                String message = getString(R.string.shareMessage1) + " " + Integer.toString(thisStage.getNumber()) +  getString(R.string.shareMessage2);
+                ShareLinkContent content = new ShareLinkContent.Builder()
+                        .setContentTitle(getString(R.string.shareTitle))
+                        .setContentDescription("Final Project Magshimim - Noam Bar Shlomo & Dror Shter")
+                        .setQuote(message)
+                        .setContentUrl(Uri.parse("http://developers.facebook.com/android"))
+                        .build();
+                ShareDialog shareDialog = new ShareDialog(StageActivity.this);
+                shareDialog.show(content);
+            }
+        };
+        showDialog(alertText, positiveButtonText, negativeButtonText, positiveDialogInterface, negativeDialogInterface);
+    }
+    private void showDialog(String alertText, String positiveButtonText, String negativeButtonText,DialogInterface.OnClickListener positiveDialogInterface, DialogInterface.OnClickListener negativeDialogInterface)
+    {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(StageActivity.this);
+        alertDialog.setMessage(alertText).setPositiveButton(positiveButtonText, positiveDialogInterface).setNegativeButton(negativeButtonText, negativeDialogInterface).create().show();
+    }
+
 }

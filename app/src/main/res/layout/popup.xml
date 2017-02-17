@@ -9,7 +9,7 @@
         android:id="@+id/relative"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/holo_blue_bright">
+        android:background="@android:color/white">
 
         <Button
             android:text="Button"
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView2"
             android:layout_marginTop="102dp"
-            tools:textSize="36sp"
+            android:textSize="25sp"
             android:textColor="@android:color/black"
             android:height="100sp"
             android:width="200sp"
