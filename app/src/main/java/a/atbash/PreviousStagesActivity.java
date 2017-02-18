@@ -15,7 +15,7 @@ public class PreviousStagesActivity extends AppCompatActivity
 {
     private int page = 1;
     private int currButtonNumber = 1;
-    private StageHandler stageHandler = new StageHandler();
+    private StageHandler stageHandler = new StageHandler(getApplicationContext());
     private int lastLevel = stageHandler.getLastLevel(); //last level the user succeeded
     private final int NUMBER_OF_STAGES_IN_PAGE = 18;
     private int levelCount = 44; //TODO: should be from db

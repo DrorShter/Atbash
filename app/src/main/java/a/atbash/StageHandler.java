@@ -1,5 +1,8 @@
 package a.atbash;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -7,12 +10,14 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 
-public class StageHandler {
-    public StageHandler()
-    {
-
+public class StageHandler{
+    private Context context;
+    public StageHandler(Context context) {
+        this.context=context;
     }
-    private ForServer stageDAL = new ForServer();
+
+    private SQLiteDatabase.CursorFactory factory;
+    private StageDAL stageDAL = new StageDAL(this.context);
 
     public Stage getStage(int numOfQuestion) throws SQLException {
         Stage s = stageDAL.getStage(numOfQuestion);
