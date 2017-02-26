@@ -48,7 +48,7 @@ public class StageActivity extends AppCompatActivity {
     private PopupWindow popUpWindow;
     private LayoutInflater layoutInflater;
     private RelativeLayout relativeLayout;
-
+    private String messageToShare = "";
     private int stageNumber;
     private final int SUCCESS = 0;
     private final int NO_MORE_STAGES = 1;
@@ -363,7 +363,7 @@ public class StageActivity extends AppCompatActivity {
                     Stage temp  = stageHandler.getNextStage(thisStage.getNumber());
                     if (temp != null)
                     {
-                        dialogManager(SUCCESS);
+                        dialogManager(SUCCESS, temp);
                         thisStage = temp;
                         editTextQ.setText(thisStage.getQuestion());
                         editTextClue.setText("");
@@ -372,14 +372,15 @@ public class StageActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        dialogManager(NO_MORE_STAGES);
+                        dialogManager(NO_MORE_STAGES, null);
                     }
                 }
-                else {
-
-                    new android.os.CountDownTimer(1500, 1000) {
-
-                        public void onTick(long millisUntilFinished) {
+                else
+                {
+                    new android.os.CountDownTimer(1500, 1000)
+                    {
+                        public void onTick(long millisUntilFinished)
+                        {
                             editCheckText.setText(R.string.wrong);
                         }
                         public void onFinish() {
@@ -419,7 +420,7 @@ public class StageActivity extends AppCompatActivity {
         Intent intent = new Intent(StageActivity.this, MainActivity.class);
         startActivity(intent);
     }
-    public void dialogManager(int option)
+    public void dialogManager(int option, final Stage temp)
     {
         String alertText = "", positiveButtonText = "", negativeButtonText = "";
         DialogInterface.OnClickListener positiveDialogInterface = null, negativeDialogInterface = null;
@@ -441,11 +442,15 @@ public class StageActivity extends AppCompatActivity {
                 }
                 positiveButtonText = getString(R.string.nextStage);
                 negativeButtonText = getString(R.string.shareInFacebook);
+                messageToShare = getString(R.string.shareMessage1) + " " + Integer.toString(thisStage.getNumber()) +  getString(R.string.shareMessage2);
+                //no positiveDialogInterface because it moves to next stage automatically
+
                 break;
             case NO_MORE_STAGES:
                 alertText = getString(R.string.finsihedAllLevels);
                 positiveButtonText = getString(R.string.backToMainMenuAfterFinishAllLevels);
                 negativeButtonText = getString(R.string.shareInFacebook);
+                messageToShare = getString(R.string.shareMessageFinish) +  getString(R.string.shareMessage2);
                 positiveDialogInterface = new DialogInterface.OnClickListener()
                 {
                     public void onClick(DialogInterface dialog, int id)
@@ -454,17 +459,15 @@ public class StageActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 };
-                break;
         }
         negativeDialogInterface = new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int id)
             {
-                String message = getString(R.string.shareMessage1) + " " + Integer.toString(thisStage.getNumber()) +  getString(R.string.shareMessage2);
                 ShareLinkContent content = new ShareLinkContent.Builder()
                         .setContentTitle(getString(R.string.shareTitle))
                         .setContentDescription("Final Project Magshimim - Noam Bar Shlomo & Dror Shter")
-                        .setQuote(message)
+                        .setQuote(messageToShare)
                         .setContentUrl(Uri.parse("http://developers.facebook.com/android"))
                         .build();
                 ShareDialog shareDialog = new ShareDialog(StageActivity.this);

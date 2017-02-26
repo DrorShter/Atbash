@@ -42,4 +42,5 @@
     <string name="shareTitle">שיתוף תוצאה בAtbash</string>
     <string name="shareMessage1">עברתי בהצלחה את שלב</string>
     <string name="shareMessage2"> !\n הצטרפו גם אתם לפתרון חידות ההצפנה!</string>
+    <string name="shareMessageFinish"> \nעברתי בהצלחה את כל השלבים באתגר אתב"ש </string>
 </resources>

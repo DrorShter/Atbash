@@ -2,9 +2,14 @@ package a.atbash;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +19,8 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Arrays;
 
@@ -34,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     Button b;
     private StageHandler stageHandler;
     private static boolean alreadyOpened = false;
-    CallbackManager callbackManager;
+    private static CallbackManager callbackManager;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
