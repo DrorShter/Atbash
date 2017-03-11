@@ -33,7 +33,8 @@ public class StageHandler {
 
     public void updateLastLevel(int curLevel) throws SQLException {
         int curLast = getLastLevel();
-        if (curLast < curLevel) {
+        if (curLast < curLevel) //i think this is not necessary. need to check.
+        {
             stageDAL.updateLastLevel(curLevel);
         }
     }
@@ -47,7 +48,7 @@ public class StageHandler {
                 try
                 {
                     ObjectMapper objectMapper = new ObjectMapper();
-                    List<Stage> stages = objectMapper.readValue(new URL("http://192.168.1.13:8080/useraccount/AtbashServerAPI/getAllStages"), new TypeReference<List<Stage>>(){});
+                    List<Stage> stages = objectMapper.readValue(new URL("http://192.168.14.80:8080/useraccount/AtbashServerAPI/getAllStages"), new TypeReference<List<Stage>>(){});
                     stageDAL.updateStagesFromServer(stages);
                 }
                 catch (Exception e)
@@ -81,5 +82,12 @@ public class StageHandler {
             }
         }
         return null;
+    }
+
+    public String[][] getNamesAndScores(String[] ids)
+    {
+        //should check in server which 10 ids have the highest score and return it.
+        String[][] ret = new String[][]{{"a", "15"}, {"b", "25"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}};
+        return ret;
     }
 }

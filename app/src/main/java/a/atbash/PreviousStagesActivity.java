@@ -114,7 +114,7 @@ public class PreviousStagesActivity extends AppCompatActivity
     {
         return ((levelCount-1) / NUMBER_OF_STAGES_IN_PAGE) + 1;
     }
-    public void GoToMainActivity(View view)
+    public void goToMainActivity(View view)
     {
         Intent intent = new Intent(PreviousStagesActivity.this, MainActivity.class);
         startActivity(intent);

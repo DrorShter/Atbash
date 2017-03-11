@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -20,16 +21,18 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
-import com.facebook.CallbackManager;
+import com.facebook.AccessToken;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
-import com.facebook.share.ShareApi;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Random;
 
 public class StageActivity extends AppCompatActivity {
@@ -355,9 +358,26 @@ public class StageActivity extends AppCompatActivity {
             {
                 if((editText.getText().toString()).equals(thisStage.getAnswer()))
                 {
-                    try {
-                        stageHandler.updateLastLevel(thisStage.getNumber());
-                    } catch (SQLException e) {
+                    try
+                    {
+                        if (stageHandler.getLastLevel() == thisStage.getNumber())
+                        {
+                            stageHandler.updateLastLevel(thisStage.getNumber());
+                            Bundle param = new Bundle();
+                            param.putInt("score", 11000);
+                            LoginManager.getInstance().logInWithPublishPermissions(StageActivity.this, Arrays.asList("publish_actions"));
+                            new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/scores", param, HttpMethod.POST, new GraphRequest.Callback()
+                            {
+                                public void onCompleted(GraphResponse response)
+                                {
+                                    System.out.println("score = " + response.toString());
+                                }
+                            }).executeAsync();
+
+                        }
+                    }
+                    catch (SQLException e)
+                    {
                         e.printStackTrace();
                     }
                     Stage temp  = stageHandler.getNextStage(thisStage.getNumber());
@@ -415,7 +435,7 @@ public class StageActivity extends AppCompatActivity {
             }
         };
     }
-    public void GoToMainActivity(View view)
+    public void goToMainActivity(View view)
     {
         Intent intent = new Intent(StageActivity.this, MainActivity.class);
         startActivity(intent);
