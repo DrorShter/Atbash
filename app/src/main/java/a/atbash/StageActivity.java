@@ -70,11 +70,7 @@ public class StageActivity extends AppCompatActivity {
         editTextQ=(EditText)findViewById(R.id.question);
         back = (Button)findViewById(R.id.BACK);
         relativeLayout = (RelativeLayout) findViewById(R.id.activity_main);
-        try {
-            thisStage = stageHandler.getStage(stageNumber);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        thisStage = stageHandler.getStage(stageNumber);
         Button[] b = new Button[30];
         b[0] = (Button)findViewById((R.id.n1));
         b[1] = (Button)findViewById((R.id.n2));
@@ -358,27 +354,11 @@ public class StageActivity extends AppCompatActivity {
             {
                 if((editText.getText().toString()).equals(thisStage.getAnswer()))
                 {
-                    try
+                    if (stageHandler.getLastLevel() == thisStage.getNumber())
                     {
-                        if (stageHandler.getLastLevel() == thisStage.getNumber())
-                        {
-                            stageHandler.updateLastLevel(thisStage.getNumber());
-                            Bundle param = new Bundle();
-                            param.putInt("score", 11000);
-                            LoginManager.getInstance().logInWithPublishPermissions(StageActivity.this, Arrays.asList("publish_actions"));
-                            new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/scores", param, HttpMethod.POST, new GraphRequest.Callback()
-                            {
-                                public void onCompleted(GraphResponse response)
-                                {
-                                    System.out.println("score = " + response.toString());
-                                }
-                            }).executeAsync();
-
-                        }
-                    }
-                    catch (SQLException e)
-                    {
-                        e.printStackTrace();
+                        stageHandler.updateLastLevel(thisStage.getNumber());
+                        Bundle param = new Bundle();
+                        param.putInt("score", 11000);
                     }
                     Stage temp  = stageHandler.getNextStage(thisStage.getNumber());
                     if (temp != null)

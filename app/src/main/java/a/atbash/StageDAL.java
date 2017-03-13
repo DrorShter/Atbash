@@ -41,7 +41,8 @@ public class StageDAL extends Application
         connection=getConnection();
     }
 
-    public int getCurrentLevel() throws SQLException {
+    public int getCurrentLevel()
+    {
         /*
         String query="SELECT * FROM lastLevel";
         preparedStatement=connection.prepareStatement(query);
@@ -49,9 +50,10 @@ public class StageDAL extends Application
         int last=Integer.parseInt(resultSet.getString("last"));
         return last;
         */
-        return 1; //just for not exception - noam
+        return 3; //should be from database
     }
-    public Stage getStage(int num) throws SQLException {
+    public Stage getStage(int num)
+    {
         /*
         String question, answer, clue, query="SELECT * FROM Level WHERE NumberOfQuestion=?";
         preparedStatement=connection.prepareStatement(query);
@@ -74,7 +76,8 @@ public class StageDAL extends Application
         }
         return ret;
     }
-    public void updateLastLevel(int curLevel) throws SQLException {
+    public void updateLastLevel(int curLevel)
+    {
         /*
         String query="UPDATE lastLevel set last=?";
         preparedStatement=connection.prepareStatement(query);

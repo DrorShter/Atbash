@@ -25,6 +25,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -33,15 +35,15 @@ import java.util.List;
 
 public class LeaderboardsActivity extends AppCompatActivity
 {
-    public static int COUNT_OF_FRIENDS = 10;
+    private static int COUNT_OF_FRIENDS = 10;
     private String[][] namesAndScores = {{"a", "a"}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
+    private final Logger logger = LoggerFactory.getLogger(LeaderboardsActivity.class);
     public class TextViewAdapter  extends BaseAdapter
     {
         private Context mContext;
         public TextViewAdapter(Context c) {
             mContext = c;
         }
-
         public int getCount()
         {
             return COUNT_OF_FRIENDS * 2;
@@ -77,8 +79,6 @@ public class LeaderboardsActivity extends AppCompatActivity
             @Override
             public void run()
             {
-                try
-                {
                     new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/friends", null, HttpMethod.GET, new GraphRequest.Callback()
                     {
                         public void onCompleted(GraphResponse response)
@@ -86,11 +86,11 @@ public class LeaderboardsActivity extends AppCompatActivity
                             try
                             {
                                 JSONObject jo = response.getJSONObject();
-                                JSONArray ja = jo.getJSONArray("data");
+                                JSONArray ja = null;
+                                ja = jo.getJSONArray("data");
                                 System.out.println(ja); // just for debug
                                 String[] ids = new String[ja.length()];
-                                for (int i = 0; i < ja.length(); i++)
-                                {
+                                for (int i = 0; i < ja.length(); i++) {
                                     JSONObject friend = ja.getJSONObject(i);
                                     //String name = friend.getString("name"); //working but we dont need it
                                     String id = friend.getString("id");
@@ -99,28 +99,23 @@ public class LeaderboardsActivity extends AppCompatActivity
                                 StageHandler stageHandler = new StageHandler();
                                 namesAndScores = stageHandler.getNamesAndScores(ids);
                             }
-                            catch (JSONException j)
+                            catch (JSONException e)
                             {
-                                //
+                                logger.error("JsonException while parsing friends in LeaderboardsActivity", e.toString());
                             }
                         }
                     }).executeAndWait();
                 }
-                catch (Exception e)
-                {
-                    System.out.println("catch in connection with RestAPI");
-                    e.printStackTrace();
-                }
-            }
         });
         thread.start();
         try
         {
             thread.join();
         }
-        catch (InterruptedException i)
+        catch (InterruptedException e)
         {
-            System.out.println("error in joining the thread");
+            logger.error("InterruptedException while joining the thread in LeaderboardsActivity", e.toString());
+            System.out.println("");
         }
         GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(editTextAdapter);

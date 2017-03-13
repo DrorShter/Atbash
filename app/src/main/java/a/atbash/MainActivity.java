@@ -10,32 +10,34 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import org.apache.commons.io.IOUtils;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
 
 import com.facebook.AccessToken;
-import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-
+import org.slf4j.Logger;
 
 public class MainActivity extends AppCompatActivity {
     Button b;
     private StageHandler stageHandler;
     private static CallbackManager callbackManager;
+    private static boolean FirstTimeInMainActivity = true;
+    private final Logger logger = LoggerFactory.getLogger(MainActivity.class);
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        if (!isLoggedIn())
+        if (FirstTimeInMainActivity)
         {
+            FirstTimeInMainActivity = false;
             callbackManager = CallbackManager.Factory.create();
             LoginManager.getInstance().registerCallback(callbackManager,
                     new FacebookCallback<LoginResult>() {
