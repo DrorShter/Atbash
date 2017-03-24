@@ -47,5 +47,6 @@ android {
 }
 
 dependencies {
-
+    compile 'com.android.support:design:+'
+    compile 'com.android.support:support-v13:24.2.1'
 }

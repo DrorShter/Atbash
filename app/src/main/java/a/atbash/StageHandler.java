@@ -80,10 +80,16 @@ public class StageHandler
         return null;
     }
 
-    public String[][] getNamesAndScores(String[] ids)
+    public String[][] getNamesAndStagesFriends(String[] ids)
     {
-        //should check in server which 10 ids have the highest score and return it.
-        String[][] ret = new String[][]{{"a", "15"}, {"b", "25"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}};
+        //TODO: should be from server
+        String[][] ret = new String[][]{{"friend1", "15"}, {"b", "25"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}};
+        return ret;
+    }
+    public String[][] getNamesAndStagesGlobal()
+    {
+        //TODO: should be from server
+        String[][] ret = new String[][]{{"global1", "15"}, {"b", "25"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}};
         return ret;
     }
 }

@@ -44,5 +44,8 @@
     <string name="shareMessage2"> !\n הצטרפו גם אתם לפתרון חידות ההצפנה!</string>
     <string name="shareMessageFinish"> \nעברתי בהצלחה את כל השלבים באתגר אתב"ש </string>
     <string name="cannotShowLeaderboards"> על מנת לצפות בטבלת השיאים עליך להיות מחובר לפייסבוק. </string>
+    <string name="title_activity_leaderboards2">LeaderboardsActivity2</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 
 </resources>
