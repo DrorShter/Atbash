@@ -1,38 +1,40 @@
 package a.atbash;
 
+import java.net.URL;
+import java.util.List;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class StageHandler {
+public class StageHandler
+{
+    private final Logger logger = LoggerFactory.getLogger(StageHandler.class);
     public StageHandler()
     {
 
     }
-    private ForServer stageDAL = new ForServer();
+    private StageDAL stageDAL = new StageDAL();
 
-    public Stage getStage(int numOfQuestion) throws SQLException {
+    public Stage getStage(int numOfQuestion)
+    {
         Stage s = stageDAL.getStage(numOfQuestion);
         return s;
     }
 
-    public int getLastLevel() {
-        int last = 3;
-        try {
-            last = stageDAL.getCurrentLevel();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        //return last;
-        return 3; // just for check, should return last
+    public int getLastLevel()
+    {
+        int last = stageDAL.getCurrentLevel();
+        return last;
     }
 
-    public void updateLastLevel(int curLevel) throws SQLException {
+    public void updateLastLevel(int curLevel)
+    {
         int curLast = getLastLevel();
-        if (curLast < curLevel) {
+        if (curLast < curLevel) //i think this is not necessary. need to check.
+        {
             stageDAL.updateLastLevel(curLevel);
         }
     }
@@ -43,16 +45,16 @@ public class StageHandler {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
+                List<Stage> stages = null;
+                ObjectMapper objectMapper = new ObjectMapper();
                 try
                 {
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    List<Stage> stages = objectMapper.readValue(new URL("http://192.168.1.13:8080/useraccount/AtbashServerAPI/getAllStages"), new TypeReference<List<Stage>>(){});
+                    stages = objectMapper.readValue(new URL("http://192.168.14.80:8080/useraccount/AtbashServerAPI/getAllStages"), new TypeReference<List<Stage>>(){});
                     stageDAL.updateStagesFromServer(stages);
                 }
                 catch (Exception e)
                 {
-                    System.out.println("catch in connection with RestAPI");
-                    e.printStackTrace();
+                    logger.error("Exception in connection with RestAPI in StageHandler", e.toString());
                 }
             }
         });
@@ -61,9 +63,9 @@ public class StageHandler {
         {
             thread.join();
         }
-        catch (InterruptedException i)
+        catch (InterruptedException e)
         {
-            System.out.println("error in joining the thread");
+            logger.error("Exception in in joining the thread in StageHandler", e.toString());
             ret = false;
         }
         return ret;
@@ -73,12 +75,21 @@ public class StageHandler {
     {
         if (thisStage < getLastLevel())
         {
-            try {
-                return getStage(thisStage + 1);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            return getStage(thisStage + 1);
         }
         return null;
+    }
+
+    public String[][] getNamesAndStagesFriends(String[] ids)
+    {
+        //TODO: should be from server
+        String[][] ret = new String[][]{{"friend1", "15"}, {"b", "25"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}};
+        return ret;
+    }
+    public String[][] getNamesAndStagesGlobal()
+    {
+        //TODO: should be from server
+        String[][] ret = new String[][]{{"global1", "15"}, {"b", "25"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}, {"", "8"}};
+        return ret;
     }
 }
