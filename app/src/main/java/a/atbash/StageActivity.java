@@ -28,7 +28,7 @@ public class StageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent i = getIntent();
-        System.out.println(getApplicationContext().getDatabasePath("AtbashClient1.db"));
+
         stageHandler = new StageHandler(getApplicationContext());
         editText = (EditText)findViewById(R.id.editText);
         editCheckText =(EditText)findViewById(R.id.checkAns);

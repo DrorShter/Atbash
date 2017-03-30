@@ -6,34 +6,37 @@ import android.database.sqlite.SQLiteDatabase;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 
 public class StageHandler{
     private Context context;
+    private StageDAL stageDAL = null;
+    private SQLiteDatabase.CursorFactory factory;
     public StageHandler(Context context) {
         this.context=context;
+        stageDAL=new StageDAL(this.context);
     }
 
-    private SQLiteDatabase.CursorFactory factory;
-    private StageDAL stageDAL = new StageDAL(this.context);
-
     public Stage getStage(int numOfQuestion) throws SQLException {
-        Stage s = stageDAL.getStage(numOfQuestion);
+        Stage s = null;
+        try {
+            s = stageDAL.getStage(numOfQuestion);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return s;
     }
 
     public int getLastLevel() {
-        int last = 3;
-        try {
-            last = stageDAL.getCurrentLevel();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        //return last;
-        return 3; // just for check, should return last
+        int last;
+        last = stageDAL.getCurrentLevel();
+        return last;
     }
+        //return last;
+         // just for check, should return last
 
     public void updateLastLevel(int curLevel) throws SQLException {
         int curLast = getLastLevel();
