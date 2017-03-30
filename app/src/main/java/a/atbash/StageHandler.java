@@ -41,7 +41,7 @@ public class StageHandler
 
     public boolean updateStagesFromServer()
     {
-        boolean ret = true;
+        boolean ret = true; //
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
