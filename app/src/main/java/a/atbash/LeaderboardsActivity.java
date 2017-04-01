@@ -15,8 +15,8 @@ public class LeaderboardsActivity extends AppCompatActivity {
         setContentView(R.layout.leaderboards);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Friends"));
-        tabLayout.addTab(tabLayout.newTab().setText("Global"));
+        tabLayout.addTab(tabLayout.newTab().setText("עולמי"));
+        tabLayout.addTab(tabLayout.newTab().setText("חברים"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);

@@ -20,6 +20,7 @@ import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.facebook.AccessToken;
 import com.facebook.FacebookCallback;
@@ -42,15 +43,13 @@ public class StageActivity extends AppCompatActivity {
     EditText editCheckText;
     EditText editTextClue;
     EditText editTextQ;
+    TextView textViewStageNumber;
     Button bC;
     Button bClue;
     Button back;
     StageHandler stageHandler;
     GridLayout gridLayout;
     FacebookCallback facebookCallback;
-    private PopupWindow popUpWindow;
-    private LayoutInflater layoutInflater;
-    private RelativeLayout relativeLayout;
     private String messageToShare = "";
     private int stageNumber;
     private final int SUCCESS = 0;
@@ -62,14 +61,14 @@ public class StageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent i = getIntent();
-        stageHandler = new StageHandler();
+        stageHandler = new StageHandler(this);
         stageNumber = i.getIntExtra("Stage", stageHandler.getLastLevel()); //get the number of stage from previous stages activity or default - database
-        editText = (EditText)findViewById(R.id.editText);
-        editCheckText =(EditText)findViewById(R.id.checkAns);
+        textViewStageNumber = (TextView) findViewById(R.id.textViewStageNumber);
+        textViewStageNumber.setText(getString(R.string.stage) + " " + stageNumber);
+        editText =(EditText)findViewById(R.id.answer);
         editTextClue=(EditText)findViewById(R.id.clue);
         editTextQ=(EditText)findViewById(R.id.question);
         back = (Button)findViewById(R.id.BACK);
-        relativeLayout = (RelativeLayout) findViewById(R.id.activity_main);
         thisStage = stageHandler.getStage(stageNumber);
         Button[] b = new Button[30];
         b[0] = (Button)findViewById((R.id.n1));
@@ -367,7 +366,6 @@ public class StageActivity extends AppCompatActivity {
                         thisStage = temp;
                         editTextQ.setText(thisStage.getQuestion());
                         editTextClue.setText("");
-                        editCheckText.setText("");
                         editText.setText("");
                     }
                     else
@@ -377,14 +375,17 @@ public class StageActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    new android.os.CountDownTimer(1500, 1000)
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(StageActivity.this).setMessage(getString(R.string.wrong));
+                    final AlertDialog wrongAnswer = builder.show();
+                    new android.os.CountDownTimer(1500, 1500)
                     {
                         public void onTick(long millisUntilFinished)
                         {
-                            editCheckText.setText(R.string.wrong);
+
                         }
-                        public void onFinish() {
-                            editCheckText.setText("");
+                        public void onFinish()
+                        {
+                            wrongAnswer.dismiss();
                         }
                     }.start();
                 }

@@ -53,7 +53,7 @@ public class GlobalLeaderboard extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        StageHandler stageHandler = new StageHandler();
+        StageHandler stageHandler = new StageHandler(getContext());
         namesAndScores = stageHandler.getNamesAndStagesGlobal();
         TextViewAdapter editTextAdapter = new TextViewAdapter(getActivity());
         View view = inflater.inflate(R.layout.friends_leaderboard, container, false);

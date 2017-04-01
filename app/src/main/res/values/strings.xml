@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Atbash</string>
-    <string name="correct">"נכון מאוד"</string>
     <string name="wrong">"לא נכון, נסה שנית"</string>
     <string name="alef">"א"</string>
     <string name="bet">"ב"</string>
@@ -47,5 +46,7 @@
     <string name="title_activity_leaderboards2">LeaderboardsActivity2</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="stage">שלב</string>
+    <string name="facebookSuccess">מחובר לפייסבוק</string>
 
 </resources>

@@ -77,7 +77,7 @@ public class FriendsLeaderboard extends Fragment
                                 String id = friend.getString("id");
                                 ids[i] = id;
                             }
-                            StageHandler stageHandler = new StageHandler();
+                            StageHandler stageHandler = new StageHandler(getContext());
                             namesAndScores = stageHandler.getNamesAndStagesFriends(ids);
                         } catch (JSONException e) {
                             logger.error("JsonException while parsing friends in LeaderboardsActivity", e.toString());

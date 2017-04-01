@@ -1,5 +1,6 @@
 package a.atbash;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInstaller;
 import android.os.Bundle;
@@ -44,13 +45,13 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(LoginResult loginResult)
                         {
-                            Toast.makeText(MainActivity.this, "Login Succeeded", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, getString(R.string.facebookSuccess), Toast.LENGTH_LONG).show();
 
                         }
                         @Override
                         public void onCancel()
                         {
-                            Toast.makeText(MainActivity.this, "Login Cancel", Toast.LENGTH_LONG).show();
+
                         }
                         @Override
                         public void onError(FacebookException exception)

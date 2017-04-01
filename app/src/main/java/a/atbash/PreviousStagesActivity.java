@@ -19,7 +19,7 @@ import android.widget.Toast;
 public class PreviousStagesActivity extends AppCompatActivity
 {
     private int page = 1;
-    private StageHandler stageHandler = new StageHandler();
+    private StageHandler stageHandler = new StageHandler(this);
     private int lastLevel = stageHandler.getLastLevel(); //last level the user succeeded
     private final int NUMBER_OF_STAGES_IN_PAGE = 20;
     private GestureDetectorCompat detector;

@@ -1,5 +1,8 @@
 package a.atbash;
 
+import android.content.Context;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
@@ -12,15 +15,25 @@ import org.slf4j.LoggerFactory;
 public class StageHandler
 {
     private final Logger logger = LoggerFactory.getLogger(StageHandler.class);
-    public StageHandler()
+    private StageDAL stageDAL;
+    private final Context context;
+    public StageHandler(Context context)
     {
-
+        this.context = context;
+        stageDAL = new StageDAL(context);
     }
-    private StageDAL stageDAL = new StageDAL();
 
     public Stage getStage(int numOfQuestion)
     {
-        Stage s = stageDAL.getStage(numOfQuestion);
+        Stage s = null;
+        try
+        {
+            s = stageDAL.getStage(numOfQuestion);
+        }
+        catch (IOException e)
+        {
+            logger.error("Exception in getting stage in StageHandler", e.toString());
+        }
         return s;
     }
 
@@ -49,7 +62,7 @@ public class StageHandler
                 ObjectMapper objectMapper = new ObjectMapper();
                 try
                 {
-                    stages = objectMapper.readValue(new URL("http://192.168.14.80:8080/useraccount/AtbashServerAPI/getAllStages"), new TypeReference<List<Stage>>(){});
+                    stages = objectMapper.readValue(new URL("http://127.0.0.1:8080/useraccount/AtbashServerAPI/getAllStages"), new TypeReference<List<Stage>>(){});
                     stageDAL.updateStagesFromServer(stages);
                 }
                 catch (Exception e)
