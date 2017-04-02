@@ -15,27 +15,31 @@ public class StageDAL
 {
     private ObjectMapper mapper=null;
     private File path;
+
     public StageDAL(Context context)
     {
-        //path=new File(context.getFilesDir(), "stages");
-        //mapper=new ObjectMapper();
+        path=new File(context.getFilesDir(), "stages");
+        mapper=new ObjectMapper();
+        if(!path.exists())
+        {
+
+            path.mkdirs();
+        }
     }
 
     public Stage getStage(int num) throws IOException
     {
-        /*
         ObjectMapper mapper=new ObjectMapper();
         File file = new File(path, num + ".json");
         return mapper.readValue(file, Stage.class);
-        */
-        Stage stage = new Stage(3, "ק", "ר", "ש"); //debug
-        return stage; //debug
     }
     public int getCurrentLevel() {
-        /*
+
         File file = new File(path, "currentLevel.txt");
         if(!file.exists())
         {
+
+            file.mkdirs();
             FileOutputStream stream = null;
             try {
                 stream = new FileOutputStream(file);
@@ -57,6 +61,7 @@ public class StageDAL
         }
         else
         {
+            System.out.println("here");
             Scanner scanner= null;
             try {
                 scanner = new Scanner(file);
@@ -66,12 +71,10 @@ public class StageDAL
             String s=scanner.nextLine();
             return Integer.parseInt(s);
         }
-        */
-        return 3; //just for debug
+
     }
     public void updateLastLevel(int cur)
     {
-        /*
         File file = new File(path, "currentLevel.txt");
         try {
             int tmp= getCurrentLevel();
@@ -86,14 +89,21 @@ public class StageDAL
         } catch (IOException e) {
             e.printStackTrace();
         }
-        */
     }
 
     public void updateStagesFromServer(List<Stage> stages) throws IOException {
-        /*for (Stage stage : stages) {
+        Stage stage=null;
+        for (int i=0;i<stages.size()-1;i++)
+        {
+            stage= stages.get(i);
             File file = new File(path, stage.getNumber() + ".json");
             mapper.writeValue(file, stage);
         }
-        */
+    }
+
+    public int getCount()
+    {
+        System.out.println(path.listFiles().length);
+        return path.listFiles().length-1;
     }
 }

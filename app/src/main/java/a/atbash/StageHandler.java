@@ -2,15 +2,15 @@ package a.atbash;
 
 import android.content.Context;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
 
 public class StageHandler
 {
@@ -62,7 +62,8 @@ public class StageHandler
                 ObjectMapper objectMapper = new ObjectMapper();
                 try
                 {
-                    stages = objectMapper.readValue(new URL("http://127.0.0.1:8080/useraccount/AtbashServerAPI/getAllStages"), new TypeReference<List<Stage>>(){});
+                    stages = objectMapper.readValue(new URL("http://192.168.43.108:8080/getAllStages"), new TypeReference<List<Stage>>(){});
+                    System.out.println("בלמטה יש בעיה");
                     stageDAL.updateStagesFromServer(stages);
                 }
                 catch (Exception e)
@@ -86,11 +87,16 @@ public class StageHandler
 
     public Stage getNextStage(int thisStage)
     {
-        if (thisStage < getLastLevel())
+        if (thisStage < getCount())
         {
             return getStage(thisStage + 1);
         }
         return null;
+    }
+
+    public int getCount()
+    {
+        return stageDAL.getCount();
     }
 
     public String[][] getNamesAndStagesFriends(String[] ids)

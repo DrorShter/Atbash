@@ -1,8 +1,6 @@
 package a.atbash;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInstaller;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -10,20 +8,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import org.apache.commons.io.IOUtils;
-import org.slf4j.LoggerFactory;
-
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Arrays;
-
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     Button b;
@@ -59,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, exception.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
+            stageHandler=new StageHandler(this);
+            stageHandler.updateStagesFromServer();
             LoginManager.getInstance().logInWithReadPermissions(MainActivity.this, Arrays.asList("public_profile", "user_friends"));
         }
         b = (Button)findViewById((R.id.button));

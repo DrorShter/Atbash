@@ -1,39 +1,22 @@
 package a.atbash;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.facebook.AccessToken;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
-import com.facebook.login.LoginManager;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 
-import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.Random;
 
 public class StageActivity extends AppCompatActivity {
@@ -62,7 +45,7 @@ public class StageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Intent i = getIntent();
         stageHandler = new StageHandler(this);
-        stageNumber = i.getIntExtra("Stage", stageHandler.getLastLevel()); //get the number of stage from previous stages activity or default - database
+        stageNumber = i.getIntExtra("Stage", stageHandler.getLastLevel());//get the number of stage from previous stages activity or default - database
         textViewStageNumber = (TextView) findViewById(R.id.textViewStageNumber);
         textViewStageNumber.setText(getString(R.string.stage) + " " + stageNumber);
         editText =(EditText)findViewById(R.id.answer);

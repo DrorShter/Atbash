@@ -4,26 +4,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GestureDetectorCompat;
-import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.GridView;
-import android.widget.Toast;
 
 public class PreviousStagesActivity extends AppCompatActivity
 {
     private int page = 1;
-    private StageHandler stageHandler = new StageHandler(this);
-    private int lastLevel = stageHandler.getLastLevel(); //last level the user succeeded
+    private StageHandler stageHandler;
+    private int lastLevel; //last level the user succeeded
     private final int NUMBER_OF_STAGES_IN_PAGE = 20;
     private GestureDetectorCompat detector;
-    private int levelCount = 44; //TODO: should be from db
+    private int levelCount; //TODO: should be from db
+
 
     public class ButtonAdapter extends BaseAdapter
     {
@@ -106,6 +102,9 @@ public class PreviousStagesActivity extends AppCompatActivity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        stageHandler= new StageHandler(this);
+        lastLevel=stageHandler.getLastLevel();
+        levelCount=stageHandler.getCount();
         setContentView(R.layout.previous_stages);
         GridView gridview = (GridView) findViewById(R.id.gridview);
         ButtonAdapter buttonAdapter = new ButtonAdapter(this);
