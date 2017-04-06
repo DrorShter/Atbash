@@ -4,15 +4,21 @@ import android.content.Context;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Scanner;
 
 public class StageDAL
 {
+    private final Logger logger = LoggerFactory.getLogger(StageDAL.class);
     private ObjectMapper mapper=null;
     private File path;
 
@@ -33,61 +39,58 @@ public class StageDAL
         File file = new File(path, num + ".json");
         return mapper.readValue(file, Stage.class);
     }
-    public int getCurrentLevel() {
-
+    public int getCurrentStageNumber()
+    {
         File file = new File(path, "currentLevel.txt");
         if(!file.exists())
         {
-
-            file.mkdirs();
+            file.getParentFile().mkdirs();
             FileOutputStream stream = null;
-            try {
+            try
+            {
                 stream = new FileOutputStream(file);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            try {
                 stream.write("1".getBytes());
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    stream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                stream.close();
+            }
+            catch (IOException e)
+            {
+                logger.error("Exception 1 in getting CurrentLevel in StageDAL", e.toString());
             }
             return 1;
         }
         else
         {
-            System.out.println("here");
             Scanner scanner= null;
-            try {
+            try
+            {
                 scanner = new Scanner(file);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
             }
-            String s=scanner.nextLine();
-            return Integer.parseInt(s);
+            catch (FileNotFoundException e)
+            {
+                logger.error("Exception 2 in getting CurrentLevel in StageDAL", e.toString());
+            }
+            String s1=scanner.nextLine();
+            System.out.println(s1);
+            return Integer.parseInt(s1);
         }
 
     }
-    public void updateLastLevel(int cur)
+    public void setCurrentStageNumber(int cur)
     {
         File file = new File(path, "currentLevel.txt");
-        try {
-            int tmp= getCurrentLevel();
+        try
+        {
+            int tmp= getCurrentStageNumber();
             if(tmp<cur)
             {
                 FileOutputStream stream = new FileOutputStream(file, false);
-                stream.write(cur);
+                stream.write(String.valueOf(cur).getBytes());
                 stream.close();
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
+            logger.error("Exception in setting new CurrentLevel in StageDAL", e.toString());
         }
     }
 
@@ -95,7 +98,7 @@ public class StageDAL
         Stage stage=null;
         for (int i=0;i<stages.size()-1;i++)
         {
-            stage= stages.get(i);
+            stage = stages.get(i);
             File file = new File(path, stage.getNumber() + ".json");
             mapper.writeValue(file, stage);
         }
@@ -103,7 +106,6 @@ public class StageDAL
 
     public int getCount()
     {
-        System.out.println(path.listFiles().length);
         return path.listFiles().length-1;
     }
 }

@@ -103,7 +103,7 @@ public class PreviousStagesActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         stageHandler= new StageHandler(this);
-        lastLevel=stageHandler.getLastLevel();
+        lastLevel=stageHandler.getCurrentStageNumber();
         levelCount=stageHandler.getCount();
         setContentView(R.layout.previous_stages);
         GridView gridview = (GridView) findViewById(R.id.gridview);

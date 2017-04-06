@@ -37,18 +37,18 @@ public class StageHandler
         return s;
     }
 
-    public int getLastLevel()
+    public int getCurrentStageNumber()
     {
-        int last = stageDAL.getCurrentLevel();
+        int last = stageDAL.getCurrentStageNumber();
         return last;
     }
 
-    public void updateLastLevel(int curLevel)
+    public void setCurrentStageNumber (int curLevel)
     {
-        int curLast = getLastLevel();
+        int curLast = getCurrentStageNumber();
         if (curLast < curLevel) //i think this is not necessary. need to check.
         {
-            stageDAL.updateLastLevel(curLevel);
+            stageDAL.setCurrentStageNumber (curLevel);
         }
     }
 
@@ -62,8 +62,8 @@ public class StageHandler
                 ObjectMapper objectMapper = new ObjectMapper();
                 try
                 {
-                    stages = objectMapper.readValue(new URL("http://192.168.43.108:8080/getAllStages"), new TypeReference<List<Stage>>(){});
-                    System.out.println("בלמטה יש בעיה");
+                    stages = objectMapper.readValue(new URL("http://192.168.9.22:8080/getAllStages"), new TypeReference<List<Stage>>(){});
+                    System.out.println(stages);
                     stageDAL.updateStagesFromServer(stages);
                 }
                 catch (Exception e)
