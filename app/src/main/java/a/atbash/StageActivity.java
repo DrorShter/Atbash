@@ -23,15 +23,11 @@ public class StageActivity extends AppCompatActivity {
     // DataBase dataBase=new DataBase(this);
     Stage thisStage = new Stage();
     EditText editText;
-    EditText editCheckText;
-    EditText editTextClue;
-    EditText editTextQ;
-    TextView textViewStageNumber;
+    TextView stageNumberTextView, questionTextView;
     Button bC;
     Button bClue;
     Button back;
     StageHandler stageHandler;
-    GridLayout gridLayout;
     FacebookCallback facebookCallback;
     private String messageToShare = "";
     private int stageNumber;
@@ -46,13 +42,12 @@ public class StageActivity extends AppCompatActivity {
         Intent i = getIntent();
         stageHandler = new StageHandler(this);
         stageNumber = i.getIntExtra("Stage", stageHandler.getCurrentStageNumber());//get the number of stage from previous stages activity or default - database
-        textViewStageNumber = (TextView) findViewById(R.id.textViewStageNumber);
+        stageNumberTextView = (TextView) findViewById(R.id.textViewStageNumber);
         editText =(EditText)findViewById(R.id.answer);
-        editTextClue=(EditText)findViewById(R.id.clue);
-        editTextQ=(EditText)findViewById(R.id.question);
+        questionTextView=(TextView)findViewById(R.id.question);
         back = (Button)findViewById(R.id.BACK);
         thisStage = stageHandler.getStage(stageNumber);
-        textViewStageNumber.setText(getString(R.string.stage) + " " + String.valueOf(thisStage.getNumber()));
+        stageNumberTextView.setText(getString(R.string.stage) + " " + String.valueOf(thisStage.getNumber()));
         Button[] b = new Button[30];
         b[0] = (Button)findViewById((R.id.n1));
         b[1] = (Button)findViewById((R.id.n2));
@@ -86,7 +81,7 @@ public class StageActivity extends AppCompatActivity {
         b[29] = (Button)findViewById((R.id.n30));
         bC = (Button)findViewById((R.id.checkButton));
         bClue = (Button)findViewById((R.id.clueButton));
-        editTextQ.setText(thisStage.getQuestion());
+        questionTextView.setText(thisStage.getQuestion());
         b[0].setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -345,8 +340,7 @@ public class StageActivity extends AppCompatActivity {
                     {
                         dialogManager(SUCCESS, temp);
                         thisStage = temp;
-                        editTextQ.setText(thisStage.getQuestion());
-                        editTextClue.setText("");
+                        questionTextView.setText(thisStage.getQuestion());
                         editText.setText("");
                     }
                     else
@@ -377,7 +371,9 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                editTextClue.setText(thisStage.getClue());
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(StageActivity.this);
+                DialogInterface.OnClickListener positiveDialogInterface = null;
+                alertDialog.setMessage(thisStage.getClue()).setPositiveButton(getString(R.string.ok), positiveDialogInterface).create().show();
             }
         });
         facebookCallback = new FacebookCallback() {

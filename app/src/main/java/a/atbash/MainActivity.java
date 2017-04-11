@@ -12,6 +12,7 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        stageHandler=new StageHandler(this);
+        stageHandler.updateStagesFromServer();
         if (FirstTimeInMainActivity)
         {
             FirstTimeInMainActivity = false;
@@ -44,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
                         public void onSuccess(LoginResult loginResult)
                         {
                             Toast.makeText(MainActivity.this, getString(R.string.facebookSuccess), Toast.LENGTH_LONG).show();
-
                         }
                         @Override
                         public void onCancel()
@@ -57,10 +59,10 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, exception.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
-            stageHandler=new StageHandler(this);
-            stageHandler.updateStagesFromServer();
+
             LoginManager.getInstance().logInWithReadPermissions(MainActivity.this, Arrays.asList("public_profile", "user_friends"));
         }
+        /*
         b = (Button)findViewById((R.id.button));
         b.setOnClickListener(new View.OnClickListener()
         {
@@ -70,15 +72,15 @@ public class MainActivity extends AppCompatActivity {
                 goToStageActivity(v);
             }
         });
-        try {
-            IOUtils.copy(getAssets().open("AtbashClient1.db"), new FileOutputStream(getFilesDir()+"/AtbashClient2.db"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println("jdbc:sqlite:"+getFilesDir()+"/test.db");
+        */
+
     }
     public void goToStageActivity(View view)
     {
+        if (isLoggedIn())
+        {
+            stageHandler.newFacebookUser();
+        }
         Intent intent = new Intent(MainActivity.this, StageActivity.class);
         startActivity(intent);
     }
