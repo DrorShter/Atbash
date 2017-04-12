@@ -6,13 +6,17 @@ import lombok.Setter;
 @Setter
 public class FacebookUser
 {
-    private String FacebookID;
+    private String facebookID;
     private String name;
-    private int CurrentStageNumber;
-    public FacebookUser(String FacebookID, String name, int CurrentStageNumber) //TODO:LOMBOK
+    private int currentStageNumber;
+    public FacebookUser(String facebookID, String name, int currentStageNumber) //TODO:LOMBOK
     {
-        this.FacebookID=FacebookID;
+        this.facebookID=facebookID;
         this.name=name;
-        this.CurrentStageNumber=CurrentStageNumber;
+        this.currentStageNumber=currentStageNumber;
+    }
+    public FacebookUser()
+    {
+
     }
 }

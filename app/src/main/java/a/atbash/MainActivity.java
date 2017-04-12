@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         stageHandler=new StageHandler(this);
-        stageHandler.updateStagesFromServer();
+        stageHandler.updateStagesFromServerIfNeeded();
         if (FirstTimeInMainActivity)
         {
             FirstTimeInMainActivity = false;
@@ -47,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
                         public void onSuccess(LoginResult loginResult)
                         {
                             Toast.makeText(MainActivity.this, getString(R.string.facebookSuccess), Toast.LENGTH_LONG).show();
+                            if (Profile.getCurrentProfile() != null)
+                            {
+                                stageHandler.newFacebookUser();
+                            }
                         }
                         @Override
                         public void onCancel()
@@ -77,10 +81,6 @@ public class MainActivity extends AppCompatActivity {
     }
     public void goToStageActivity(View view)
     {
-        if (isLoggedIn())
-        {
-            stageHandler.newFacebookUser();
-        }
         Intent intent = new Intent(MainActivity.this, StageActivity.class);
         startActivity(intent);
     }

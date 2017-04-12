@@ -48,6 +48,7 @@ public class StageActivity extends AppCompatActivity {
         back = (Button)findViewById(R.id.BACK);
         thisStage = stageHandler.getStage(stageNumber);
         stageNumberTextView.setText(getString(R.string.stage) + " " + String.valueOf(thisStage.getNumber()));
+        System.out.println("StageActivity");
         Button[] b = new Button[30];
         b[0] = (Button)findViewById((R.id.n1));
         b[1] = (Button)findViewById((R.id.n2));
@@ -376,22 +377,6 @@ public class StageActivity extends AppCompatActivity {
                 alertDialog.setMessage(thisStage.getClue()).setPositiveButton(getString(R.string.ok), positiveDialogInterface).create().show();
             }
         });
-        facebookCallback = new FacebookCallback() {
-            @Override
-            public void onSuccess(Object o) {
-
-            }
-
-            @Override
-            public void onCancel() {
-
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-
-            }
-        };
     }
     public void goToMainActivity(View view)
     {

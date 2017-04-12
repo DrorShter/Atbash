@@ -47,14 +47,18 @@ public class FriendsLeaderboard extends Fragment
             TextView textView = new TextView(getActivity());
             textView.setLayoutParams(new GridView.LayoutParams(200, 100));
             textView.setPadding(1, 1, 1, 1);
-            if (facebookUsers!= null)
+            if (facebookUsers != null)
             {
-                if (position % 2 == 0) //if Name
+                if (facebookUsers.get(position/2) != null)
                 {
-                    textView.setText(facebookUsers.get(position % 2).getName());
-                } else //if CurrentStageNumber
-                {
-                    textView.setText(facebookUsers.get(position % 2).getCurrentStageNumber());
+                    if (position % 2 == 0) //if Name
+                    {
+                        textView.setText(facebookUsers.get(position / 2).getName());
+                    }
+                    else //if CurrentStageNumber
+                    {
+                        textView.setText("" + facebookUsers.get(position / 2).getCurrentStageNumber());
+                    }
                 }
             }
             else
@@ -74,7 +78,8 @@ public class FriendsLeaderboard extends Fragment
             @Override
             public void run() {
                 new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/friends", null, HttpMethod.GET, new GraphRequest.Callback() {
-                    public void onCompleted(GraphResponse response) {
+                    public void onCompleted(GraphResponse response)
+                    {
                         try
                         {
                             JSONObject jo = response.getJSONObject();

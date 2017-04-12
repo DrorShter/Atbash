@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -58,7 +59,13 @@ public class StageHandler
             stageDAL.setCurrentStageNumber (curLevel);
         }
     }
-
+    public void updateStagesFromServerIfNeeded()
+    {
+        if (getCount() < getCountFromServer() - 1)
+        {
+            updateStagesFromServer();
+        }
+    }
     public boolean updateStagesFromServer()
     {
         boolean ret = true;
@@ -109,20 +116,22 @@ public class StageHandler
 
     public void updateFacebookUser(int currentStageNumber)
     {
+        System.out.println("here");
         final boolean success = false;
         final FacebookUser user = new FacebookUser(getFacebookID(), getFacebookName(), currentStageNumber);
+        final String send = address + "/updateFacebookUser/" + user.getFacebookID() + "/" + user.getName().replaceAll("\\s+","") + "/" + String.valueOf(user.getCurrentStageNumber());
+        System.out.println(send);
         Thread thread = new Thread(new Runnable()
         {
             @Override
             public void run()
             {
                 ObjectMapper objectMapper = new ObjectMapper();
+                Boolean b = false;
                 try
                 {
-                    String send = address + "/updateFacebookUser/" + user.getFacebookID() + "/" + String.valueOf(user.getCurrentStageNumber() + "/" + user.getName());
-                    System.out.println(send);
-                    FacebookUser userReturned = objectMapper.readValue(new URL(send), new TypeReference<FacebookUser>(){});
-                    if (userReturned != user) //if there was error in the middle
+                    b = objectMapper.readValue(new URL(send), new TypeReference<Boolean>(){});
+                    if (!b)
                     {
                         throw new Exception();
                     }
@@ -159,16 +168,30 @@ public class StageHandler
         }
         public void run()
         {
-
             ObjectMapper objectMapper = new ObjectMapper();
             try
             {
-                facebookUsers = objectMapper.readValue(new URL(address + "/getFacebookFriends/" + ids.toString()), new TypeReference<List<FacebookUser>>(){});
+                String send = address + "/getFacebookFriends/" + makeIdsOneString();
+                System.out.println(send);
+                facebookUsers = objectMapper.readValue(new URL(send), new TypeReference<List<FacebookUser>>(){});
+                System.out.println(facebookUsers);
             }
             catch (Exception e)
             {
                 logger.error("Exception in connection with RestAPI in getFacebookFriendsThread in StageHandler", e.toString());
             }
+        }
+        private String makeIdsOneString()
+        {
+            String s = "";
+            for (int i=0;i<ids.length-1;i++)
+            {
+                s += ids[i];
+                s += ",";
+            }
+            s+=ids[ids.length - 1];
+            System.out.println(s);
+            return s;
         }
         public List<FacebookUser> getfacebookUsers()
         {
@@ -189,7 +212,7 @@ public class StageHandler
         }
         catch (InterruptedException e)
         {
-            logger.error("Exception in in joining the thread in getFacebookFriends in StageHandler", e.toString());
+            logger.error("Exception in in joining the thread in getFacebookFriends in StageHandler" + e.toString(), e.toString());
         }
         return facebookUsers;
     }
@@ -206,7 +229,7 @@ public class StageHandler
             }
             catch (Exception e)
             {
-                logger.error("Exception in connection with RestAPI in getFacebookGlobalThread in StageHandler", e.toString());
+                logger.error("Exception in connection with RestAPI in getFacebookGlobalThread in StageHandler" + e.toString(), e.toString());
             }
         }
         public List<FacebookUser> getfacebookUsers()
@@ -228,7 +251,7 @@ public class StageHandler
         }
         catch (InterruptedException e)
         {
-            logger.error("Exception in in joining the thread in getFacebookGlobal in StageHandler", e.toString());
+            logger.error("Exception in in joining the thread in getFacebookGlobal in StageHandler" + e.toString(), e.toString());
         }
         return facebookUsers;
     }
@@ -244,5 +267,44 @@ public class StageHandler
         String name  = Profile.getCurrentProfile().getName();
         System.out.println("Facebook Name: " + name);
         return name;
+    }
+    public class GetCountFromServerThread implements Runnable
+    {
+        private int count;
+        public void run()
+        {
+            ObjectMapper objectMapper = new ObjectMapper();
+            try
+            {
+                count = objectMapper.readValue(new URL(address + "/getCount"), new TypeReference<Integer>(){});
+                System.out.println(count);
+            }
+            catch (Exception e)
+            {
+                logger.error("Exception in connection with RestAPI in GetCountFromServerThread in StageHandler", e.toString());
+            }
+        }
+        public int getCount()
+        {
+            return count;
+        }
+
+    }
+    public int getCountFromServer()
+    {
+        int count = 0;
+        GetCountFromServerThread thread = new GetCountFromServerThread();
+        Thread t = new Thread(thread);
+        t.start();
+        try
+        {
+            t.join();
+            count = thread.getCount();
+        }
+        catch (InterruptedException e)
+        {
+            logger.error("Exception in in joining the thread in getCountFromServer in StageHandler", e.toString());
+        }
+        return count;
     }
 }
