@@ -49,5 +49,6 @@
     <string name="stage">שלב</string>
     <string name="facebookSuccess">מחובר לפייסבוק</string>
     <string name="ok">אישור</string>
-
+    <string name="noStages">לא נמצאו שלבים בקבצי המשחק. בדוק את החיבור לאינטרנט ונסה שוב מאוחר יותר.</string>
+    <string name="failedLoadingLeaderboards">לא נמצא מידע על שיאים בשרת. בדוק את החיבור לאינטרנט ונסה שוב מאוחר יותר.</string>
 </resources>

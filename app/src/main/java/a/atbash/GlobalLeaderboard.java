@@ -3,6 +3,7 @@ package a.atbash;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,8 @@ import java.util.List;
 public class GlobalLeaderboard extends Fragment
 {
     private static int COUNT_OF_PLAYERS = 10;
-    private List<FacebookUser> facebookUsers;
+    private boolean alert = false;
+    private List<FacebookUser> facebookUsers = null;
     private final Logger logger = LoggerFactory.getLogger(LeaderboardsActivity.class);
     public class TextViewAdapter  extends BaseAdapter
     {
@@ -57,7 +59,12 @@ public class GlobalLeaderboard extends Fragment
             }
             else
             {
-                System.out.println("facebookUsers is null");
+                if (!alert)
+                {
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                    alertDialog.setMessage(getString(R.string.failedLoadingLeaderboards)).create().show();
+                    alert = !alert;
+                }
             }
             return textView;
         }
@@ -65,11 +72,19 @@ public class GlobalLeaderboard extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        StageHandler stageHandler = new StageHandler(getContext());
-        facebookUsers = stageHandler.getFacebookGlobal();
+        final StageHandler stageHandler = new StageHandler(getContext());
         TextViewAdapter editTextAdapter = new TextViewAdapter(getActivity());
-        View view = inflater.inflate(R.layout.friends_leaderboard, container, false);
-        GridView gridview = (GridView) view.findViewById(R.id.gridview2);
+        Thread serverThread = new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                facebookUsers = stageHandler.getFacebookGlobal();
+            }
+        });
+        serverThread.start();
+        View view = inflater.inflate(R.layout.global_leaderboard, container, false);
+        GridView gridview = (GridView) view.findViewById(R.id.gridview);
         gridview.setAdapter(editTextAdapter);
         return view;
     }

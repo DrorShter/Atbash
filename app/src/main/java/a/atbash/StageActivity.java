@@ -125,6 +125,7 @@ public class StageActivity extends AppCompatActivity {
                         dialogManager(SUCCESS, temp);
                         thisStage = temp;
                         questionTextView.setText(thisStage.getQuestion());
+                        stageNumberTextView.setText(getString(R.string.stage) + " " + String.valueOf(thisStage.getNumber()));
                         editText.setText("");
                     }
                     else
@@ -156,8 +157,7 @@ public class StageActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(StageActivity.this);
-                DialogInterface.OnClickListener positiveDialogInterface = null;
-                alertDialog.setMessage(thisStage.getClue()).setPositiveButton(getString(R.string.ok), positiveDialogInterface).create().show();
+                alertDialog.setMessage(thisStage.getClue()).create().show();
             }
         });
     }
