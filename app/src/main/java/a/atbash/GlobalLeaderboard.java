@@ -49,7 +49,7 @@ public class GlobalLeaderboard extends Fragment
                 {
                     if (position%2 == 0) //if Name
                     {
-                        textView.setText(facebookUsers.get(position/2).getName());
+                        textView.setText(facebookUsers.get(position/2).getName());//
                     }
                     else //if CurrentStageNumber
                     {
