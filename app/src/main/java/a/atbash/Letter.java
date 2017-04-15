@@ -1,16 +1,17 @@
 package a.atbash;
 //TODO: LOMBOK
 import android.widget.Button;
-public class Letter
+
+class Letter
 {
     private String value;
     private Button button;
-    public Letter(String value, Button b)
+    Letter(String value, Button b)
     {
         this.value = value;
         this.button = b;
     }
-    public String getValue()
+    String getValue()
     {
         return value;
     }

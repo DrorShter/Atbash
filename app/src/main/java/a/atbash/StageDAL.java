@@ -1,39 +1,31 @@
 package a.atbash;
 
 import android.content.Context;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.math.BigInteger;
 import java.util.List;
 import java.util.Scanner;
 
-public class StageDAL
+class StageDAL
 {
     private final Logger logger = LoggerFactory.getLogger(StageDAL.class);
     private ObjectMapper mapper=null;
     private File path;
-
-    public StageDAL(Context context)
+    StageDAL(Context context)
     {
         path=new File(context.getFilesDir(), "stages");
         mapper=new ObjectMapper();
         if(!path.exists())
         {
-
             path.mkdirs();
         }
     }
-
-    public Stage getStage(int num) throws IOException
+    Stage getStage(int num) throws IOException
     {
         ObjectMapper mapper=new ObjectMapper();
         File file = new File(path, num + ".json");
@@ -42,6 +34,7 @@ public class StageDAL
     public int getCurrentStageNumber()
     {
         File file = new File(path, "currentLevel.txt");
+        String s1 = "";
         if(!file.exists())
         {
             file.getParentFile().mkdirs();
@@ -69,7 +62,10 @@ public class StageDAL
             {
                 logger.error("Exception 2 in getting CurrentLevel in StageDAL", e.toString());
             }
-            String s1=scanner.nextLine();
+            if (scanner != null)
+            {
+                s1=scanner.nextLine();
+            }
             System.out.println(s1);
             return Integer.parseInt(s1);
         }
@@ -94,7 +90,8 @@ public class StageDAL
         }
     }
 
-    public void updateStagesFromServer(List<Stage> stages) throws IOException {
+    public void updateStagesFromServer(List<Stage> stages) throws IOException
+    {
         Stage stage=null;
         for (int i=0;i<stages.size()-1;i++)
         {

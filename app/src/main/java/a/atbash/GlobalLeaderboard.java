@@ -12,7 +12,6 @@ import android.widget.GridView;
 import android.widget.TextView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.List;
 
 public class GlobalLeaderboard extends Fragment
@@ -21,10 +20,29 @@ public class GlobalLeaderboard extends Fragment
     private boolean alert = false;
     private List<FacebookUser> facebookUsers = null;
     private final Logger logger = LoggerFactory.getLogger(LeaderboardsActivity.class);
-    public class TextViewAdapter  extends BaseAdapter
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        final StageHandler stageHandler = new StageHandler(getContext());
+        TextViewAdapter editTextAdapter = new TextViewAdapter(getActivity());
+        Thread serverThread = new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                facebookUsers = stageHandler.getFacebookGlobal();
+            }
+        });
+        serverThread.start();
+        View view = inflater.inflate(R.layout.global_leaderboard, container, false);
+        GridView gridview = (GridView) view.findViewById(R.id.gridview);
+        gridview.setAdapter(editTextAdapter);
+        return view;
+    }
+    private class TextViewAdapter  extends BaseAdapter
     {
         private Context mContext;
-        public TextViewAdapter(Context c)
+        private TextViewAdapter(Context c)
         {
             mContext = c;
         }
@@ -53,7 +71,8 @@ public class GlobalLeaderboard extends Fragment
                     }
                     else //if CurrentStageNumber
                     {
-                        textView.setText("" + facebookUsers.get(position/2).getCurrentStageNumber());
+                        String textOfCurrentStageNumber = "" + facebookUsers.get(position/2).getCurrentStageNumber();
+                        textView.setText(textOfCurrentStageNumber);
                     }
                 }
             }
@@ -68,24 +87,5 @@ public class GlobalLeaderboard extends Fragment
             }
             return textView;
         }
-    }
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        final StageHandler stageHandler = new StageHandler(getContext());
-        TextViewAdapter editTextAdapter = new TextViewAdapter(getActivity());
-        Thread serverThread = new Thread(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                facebookUsers = stageHandler.getFacebookGlobal();
-            }
-        });
-        serverThread.start();
-        View view = inflater.inflate(R.layout.global_leaderboard, container, false);
-        GridView gridview = (GridView) view.findViewById(R.id.gridview);
-        gridview.setAdapter(editTextAdapter);
-        return view;
     }
 }

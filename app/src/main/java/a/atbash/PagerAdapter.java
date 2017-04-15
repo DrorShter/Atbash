@@ -1,13 +1,13 @@
 package a.atbash;
-import android.os.Bundle;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-public class PagerAdapter extends FragmentStatePagerAdapter
+class PagerAdapter extends FragmentStatePagerAdapter
 {
-    int mNumOfTabs = 2;
-    public PagerAdapter(FragmentManager fm, int NumOfTabs)
+    private int mNumOfTabs = 2;
+    PagerAdapter(FragmentManager fm, int NumOfTabs)
     {
         super(fm);
         this.mNumOfTabs = NumOfTabs;
@@ -19,12 +19,9 @@ public class PagerAdapter extends FragmentStatePagerAdapter
         switch (position)
         {
             case 0:
-                FriendsLeaderboard tab1 = new FriendsLeaderboard();
-                return tab1;
+                return new FriendsLeaderboard();
             case 1:
-
-                GlobalLeaderboard tab2 = new GlobalLeaderboard();
-                return tab2;
+                return new GlobalLeaderboard();
             default:
                 return null;
         }

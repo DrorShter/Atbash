@@ -9,32 +9,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridLayout;
 import android.widget.TextView;
-
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 public class StageActivity extends AppCompatActivity {
-    // DataBase dataBase=new DataBase(this);
-    Stage thisStage = new Stage();
-    EditText editText;
-    TextView stageNumberTextView, questionTextView;
-    Button check, clue, back, space, backspace;
-    StageHandler stageHandler;
-    FacebookCallback facebookCallback;
+
+    private Stage thisStage = new Stage();
+    private EditText editText;
+    private TextView stageNumberTextView, questionTextView;
+    private StageHandler stageHandler;
     private String messageToShare = "";
-    private int stageNumber;
-    private final int SUCCESS = 0;
-    private final int NO_MORE_STAGES = 1;
+    private static final int SUCCESS = 0;
+    private static final int NO_MORE_STAGES = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -43,18 +33,17 @@ public class StageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Intent intent = getIntent();
         stageHandler = new StageHandler(this);
-        stageNumber = intent.getIntExtra("Stage", stageHandler.getCurrentStageNumber());//get the number of stage from previous stages activity or default - database
+        int stageNumber = intent.getIntExtra("Stage", stageHandler.getCurrentStageNumber());//get the number of stage from previous stages activity or default - database
         stageNumberTextView = (TextView) findViewById(R.id.textViewStageNumber);
         editText =(EditText)findViewById(R.id.answer);
         questionTextView=(TextView)findViewById(R.id.question);
-        back = (Button)findViewById(R.id.BACK);
-        backspace = (Button)findViewById((R.id.n29));
-        space = (Button)findViewById((R.id.n30));
-        check = (Button)findViewById((R.id.checkButton));
-        clue = (Button)findViewById((R.id.clueButton));
+        Button backspace = (Button)findViewById((R.id.n29));
+        Button space = (Button)findViewById((R.id.n30));
+        Button check = (Button)findViewById((R.id.checkButton));
+        Button clue = (Button)findViewById((R.id.clueButton));
         thisStage = stageHandler.getStage(stageNumber);
+        questionTextView.setText(thisStage.getQuestion());
         stageNumberTextView.setText(getString(R.string.stage) + " " + String.valueOf(thisStage.getNumber()));
-        System.out.println("StageActivity");
         List<Letter> letters = new ArrayList<>();
         letters.add(new Letter(getString(R.string.kuf), (Button)findViewById((R.id.n1))));
         letters.add(new Letter(getString(R.string.reish), (Button)findViewById((R.id.n2))));
@@ -89,7 +78,6 @@ public class StageActivity extends AppCompatActivity {
             Letter letter = letters.get(i);
             letter.getButton().setOnClickListener(new CustomOnClickListener(letter, editText){});
         }
-        questionTextView.setText(thisStage.getQuestion());
         backspace.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -170,7 +158,8 @@ public class StageActivity extends AppCompatActivity {
     {
         String alertText = "", positiveButtonText = "", negativeButtonText = "";
         DialogInterface.OnClickListener positiveDialogInterface = null, negativeDialogInterface = null;
-        switch (option) {
+        switch (option)
+        {
             case SUCCESS:
                 Random rand = new Random();
                 int n = rand.nextInt(3) + 1;
@@ -190,8 +179,8 @@ public class StageActivity extends AppCompatActivity {
                 negativeButtonText = getString(R.string.shareInFacebook);
                 messageToShare = getString(R.string.shareMessage1) + " " + Integer.toString(thisStage.getNumber()) +  getString(R.string.shareMessage2);
                 //no positiveDialogInterface because it moves to next stage automatically
-
                 break;
+
             case NO_MORE_STAGES:
                 alertText = getString(R.string.finsihedAllLevels);
                 positiveButtonText = getString(R.string.backToMainMenuAfterFinishAllLevels);
@@ -205,6 +194,7 @@ public class StageActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 };
+                break;
         }
         negativeDialogInterface = new DialogInterface.OnClickListener()
         {
