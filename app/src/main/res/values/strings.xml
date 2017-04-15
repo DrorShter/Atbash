@@ -49,6 +49,8 @@
     <string name="stage">שלב</string>
     <string name="facebookSuccess">מחובר לפייסבוק</string>
     <string name="ok">אישור</string>
+    <string name="noStages">אין שלבים במאגר</string>
     <string name="instractions">הוראות</string>
+    <string name="failedLoadingLeaderboards">אין אפשרות לקבל רשימת חברים</string>
     <string name="basic_text1">שלום לכל המשתמשים\n בכל שלב תוצג לכם חידה שהתשובה לה מוצפנת\nהמטרה שלכם היא לפצח את ההצפנה\nאם אתם מתקשים תשתמשו בכפתור הרמז שיעזור לכם לגלות את סוג ההצפנה\nתודה על שהתקנתם את המשחק\n\nקרדיטים\nתודה להורינו שהביאונו עד הלום\nלמנטור התותח שלנו רן הנסיך הקטן טיבי\nלמדריך הכי טוב בארץ מיכאל ויינר\nלכיתה יב 5 שהיו שותפים איתנו לתהליך\nוכמובן לגוגל שברא לנו את stack overflow \t\tשלא היינו מסתדרים בלעדיהם</string>
 </resources>

@@ -1,8 +1,7 @@
 package a.atbash;
 
 import android.content.Context;
-import android.hardware.camera2.params.Face;
-import com.uphyca.gradle.android.AndroidAspectJPlugin;
+
 import com.facebook.Profile;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,15 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.RunnableFuture;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 public class StageHandler
 {
@@ -32,7 +23,7 @@ public class StageHandler
     {
         this.context = context;
         stageDAL = new StageDAL(context);
-        final String IP = "192.168.9.17";
+        final String IP = "192.168.14.74";
         final String port = "8080";
         address = "http://" + IP + ":" + port;
     }
