@@ -17,21 +17,19 @@ import com.facebook.FacebookException;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class StageActivity extends AppCompatActivity {
     // DataBase dataBase=new DataBase(this);
     Stage thisStage = new Stage();
     EditText editText;
-    EditText editCheckText;
-    EditText editTextClue;
-    EditText editTextQ;
-    TextView textViewStageNumber;
-    Button bC;
-    Button bClue;
-    Button back;
+    TextView stageNumberTextView, questionTextView;
+    Button check, clue, back, space, backspace;
     StageHandler stageHandler;
-    GridLayout gridLayout;
     FacebookCallback facebookCallback;
     private String messageToShare = "";
     private int stageNumber;
@@ -43,281 +41,56 @@ public class StageActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent i = getIntent();
+        Intent intent = getIntent();
         stageHandler = new StageHandler(this);
-        stageNumber = i.getIntExtra("Stage", stageHandler.getCurrentStageNumber());//get the number of stage from previous stages activity or default - database
-        textViewStageNumber = (TextView) findViewById(R.id.textViewStageNumber);
-        textViewStageNumber.setText(getString(R.string.stage) + " " + stageNumber);
+        stageNumber = intent.getIntExtra("Stage", stageHandler.getCurrentStageNumber());//get the number of stage from previous stages activity or default - database
+        stageNumberTextView = (TextView) findViewById(R.id.textViewStageNumber);
         editText =(EditText)findViewById(R.id.answer);
-
-
-        editTextClue=(EditText)findViewById(R.id.clue);//there is an clue???
-
-
-        editTextQ=(EditText)findViewById(R.id.question);//what did you do?
-
-
+        questionTextView=(TextView)findViewById(R.id.question);
         back = (Button)findViewById(R.id.BACK);
+        backspace = (Button)findViewById((R.id.n29));
+        space = (Button)findViewById((R.id.n30));
+        check = (Button)findViewById((R.id.checkButton));
+        clue = (Button)findViewById((R.id.clueButton));
         thisStage = stageHandler.getStage(stageNumber);
-        Button[] b = new Button[30];
-        b[0] = (Button)findViewById((R.id.n1));
-        b[1] = (Button)findViewById((R.id.n2));
-        b[2] = (Button)findViewById((R.id.n3));
-        b[3] = (Button)findViewById((R.id.n4));
-        b[4] = (Button)findViewById((R.id.n5));
-        b[5] = (Button)findViewById((R.id.n6));
-        b[6] = (Button)findViewById((R.id.n7));
-        b[7] = (Button)findViewById((R.id.n8));
-        b[8] = (Button)findViewById((R.id.n9));
-        b[9] = (Button)findViewById((R.id.n10));
-        b[10] = (Button)findViewById((R.id.n11));
-        b[11] = (Button)findViewById((R.id.n12));
-        b[12] = (Button)findViewById((R.id.n13));
-        b[13] = (Button)findViewById((R.id.n14));
-        b[14] = (Button)findViewById((R.id.n15));
-        b[15] = (Button)findViewById((R.id.n16));
-        b[16] = (Button)findViewById((R.id.n17));
-        b[17] = (Button)findViewById((R.id.n18));
-        b[18] = (Button)findViewById((R.id.n19));
-        b[19] = (Button)findViewById((R.id.n20));
-        b[20] = (Button)findViewById((R.id.n21));
-        b[21] = (Button)findViewById((R.id.n22));
-        b[22] = (Button)findViewById((R.id.n23));
-        b[23] = (Button)findViewById((R.id.n24));
-        b[24] = (Button)findViewById((R.id.n25));
-        b[25] = (Button)findViewById((R.id.n26));
-        b[26] = (Button)findViewById((R.id.n27));
-        b[27] = (Button)findViewById((R.id.n28));
-        b[28] = (Button)findViewById((R.id.n29));
-        b[29] = (Button)findViewById((R.id.n30));
-        bC = (Button)findViewById((R.id.checkButton));
-        bClue = (Button)findViewById((R.id.clueButton));
-        editTextQ.setText(thisStage.getQuestion());
-        b[0].setOnClickListener(new View.OnClickListener()
+        stageNumberTextView.setText(getString(R.string.stage) + " " + String.valueOf(thisStage.getNumber()));
+        System.out.println("StageActivity");
+        List<Letter> letters = new ArrayList<>();
+        letters.add(new Letter(getString(R.string.kuf), (Button)findViewById((R.id.n1))));
+        letters.add(new Letter(getString(R.string.reish), (Button)findViewById((R.id.n2))));
+        letters.add(new Letter(getString(R.string.alef), (Button)findViewById((R.id.n3))));
+        letters.add(new Letter(getString(R.string.tet), (Button)findViewById((R.id.n4))));
+        letters.add(new Letter(getString(R.string.vav), (Button)findViewById((R.id.n5))));;
+        letters.add(new Letter(getString(R.string.nunSofit), (Button)findViewById((R.id.n6))));
+        letters.add(new Letter(getString(R.string.memSofit), (Button)findViewById((R.id.n7))));
+        letters.add(new Letter(getString(R.string.pei), (Button)findViewById((R.id.n8))));
+        letters.add(new Letter(getString(R.string.shin), (Button)findViewById((R.id.n9))));
+        letters.add(new Letter(getString(R.string.dalet), (Button)findViewById((R.id.n10))));
+        letters.add(new Letter(getString(R.string.gimel), (Button)findViewById((R.id.n11))));
+        letters.add(new Letter(getString(R.string.caf), (Button)findViewById((R.id.n12))));
+        letters.add(new Letter(getString(R.string.ain), (Button)findViewById((R.id.n13))));
+        letters.add(new Letter(getString(R.string.yud), (Button)findViewById((R.id.n14))));
+        letters.add(new Letter(getString(R.string.het), (Button)findViewById((R.id.n15))));
+        letters.add(new Letter(getString(R.string.lamed), (Button)findViewById((R.id.n16))));
+        letters.add(new Letter(getString(R.string.zain), (Button)findViewById((R.id.n17))));
+        letters.add(new Letter(getString(R.string.samech), (Button)findViewById((R.id.n18))));
+        letters.add(new Letter(getString(R.string.bet), (Button)findViewById((R.id.n19))));
+        letters.add(new Letter(getString(R.string.hei), (Button)findViewById((R.id.n20))));
+        letters.add(new Letter(getString(R.string.nun), (Button)findViewById((R.id.n21))));
+        letters.add(new Letter(getString(R.string.mem), (Button)findViewById((R.id.n22))));
+        letters.add(new Letter(getString(R.string.tzadick), (Button)findViewById((R.id.n23))));
+        letters.add(new Letter(getString(R.string.taf), (Button)findViewById((R.id.n24))));
+        letters.add(new Letter(getString(R.string.cafSofit), (Button)findViewById((R.id.n25))));
+        letters.add(new Letter(getString(R.string.tzadickSofit), (Button)findViewById((R.id.n26))));
+        letters.add(new Letter(getString(R.string.peiSofit), (Button)findViewById((R.id.n27))));
+        letters.add(new Letter(".", (Button)findViewById((R.id.n28))));
+        for (int i=0;i<letters.size();i++)
         {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.kuf)));
-            }
-        });
-        b[1].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.reish)));
-            }
-        });
-        b[2].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.alef)));
-            }
-        });
-        b[3].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.tet)));
-            }
-        });
-        b[4].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.vav)));
-            }
-        });
-        b[5].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.nunSofit)));
-            }
-        });
-        b[6].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.memSofit)));
-            }
-        });
-        b[7].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.pei)));
-            }
-        });
-        b[8].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.shin)));
-            }
-        });
-        b[9].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.dalet)));
-            }
-        });
-        b[10].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.gimel)));
-            }
-        });
-        b[11].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.caf)));
-            }
-        });
-        b[12].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.ain)));
-            }
-        });
-        b[13].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.yud)));
-            }
-        });
-        b[14].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.het)));
-            }
-        });
-        b[15].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.lamed)));
-            }
-        });
-        b[16].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.zain)));
-            }
-        });
-        b[17].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.samech)));
-            }
-        });
-        b[18].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.bet)));
-            }
-        });
-        b[19].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.hei)));
-            }
-        });
-        b[20].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.nun)));
-            }
-        });
-        b[21].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.mem)));
-            }
-        });
-        b[22].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.tzadick)));
-            }
-        });
-        b[23].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.taf)));
-            }
-        });
-        b[24].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.cafSofit)));
-            }
-        });
-        b[25].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.tzadickSofit)));
-            }
-        });
-        b[26].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), getString(R.string.peiSofit)));
-            }
-        });
-        b[27].setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editText.setText(editText.getText().insert(editText.getText().length(), "."));
-            }
-        });
-        b[28].setOnClickListener(new View.OnClickListener()
+            Letter letter = letters.get(i);
+            letter.getButton().setOnClickListener(new CustomOnClickListener(letter, editText){});
+        }
+        questionTextView.setText(thisStage.getQuestion());
+        backspace.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -328,33 +101,31 @@ public class StageActivity extends AppCompatActivity {
                 }
             }
         });
-        b[29].setOnClickListener(new View.OnClickListener()
+        space.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
                 editText.setText(editText.getText().insert(editText.getText().length(), " "));
             }
         });
-        bC.setOnClickListener(new View.OnClickListener()
+        check.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                 if((editText.getText().toString()).equals(thisStage.getAnswer()))
                 {
-                    if (stageHandler.getCurrentStageNumber() < thisStage.getNumber())
+                    if (stageHandler.getCurrentStageNumber() == thisStage.getNumber())
                     {
-                        stageHandler.setCurrentStageNumber(thisStage.getNumber());
-                        Bundle param = new Bundle();
-                        param.putInt("score", 11000);
+                        stageHandler.setCurrentStageNumber(thisStage.getNumber() + 1);
                     }
                     Stage temp  = stageHandler.getNextStage(thisStage.getNumber());
                     if (temp != null)
                     {
                         dialogManager(SUCCESS, temp);
                         thisStage = temp;
-                        editTextQ.setText(thisStage.getQuestion());
-                        editTextClue.setText("");
+                        questionTextView.setText(thisStage.getQuestion());
+                        stageNumberTextView.setText(getString(R.string.stage) + " " + String.valueOf(thisStage.getNumber()));
                         editText.setText("");
                     }
                     else
@@ -380,30 +151,15 @@ public class StageActivity extends AppCompatActivity {
                 }
             }
         });
-        bClue.setOnClickListener(new View.OnClickListener()
+        clue.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                editTextClue.setText(thisStage.getClue());
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(StageActivity.this);
+                alertDialog.setMessage(thisStage.getClue()).create().show();
             }
         });
-        facebookCallback = new FacebookCallback() {
-            @Override
-            public void onSuccess(Object o) {
-
-            }
-
-            @Override
-            public void onCancel() {
-
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-
-            }
-        };
     }
     public void goToMainActivity(View view)
     {

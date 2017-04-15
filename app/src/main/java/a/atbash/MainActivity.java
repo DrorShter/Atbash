@@ -1,5 +1,6 @@
 package a.atbash;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -37,57 +38,61 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
         stageHandler=new StageHandler(this);
         stageHandler.updateStagesFromServerIfNeeded();
-        if (FirstTimeInMainActivity)
-        {
+        if (FirstTimeInMainActivity) {
             FirstTimeInMainActivity = false;
             callbackManager = CallbackManager.Factory.create();
             LoginManager.getInstance().registerCallback(callbackManager,
                     new FacebookCallback<LoginResult>() {
                         @Override
-                        public void onSuccess(LoginResult loginResult)
-                        {
+                        public void onSuccess(LoginResult loginResult) {
                             Toast.makeText(MainActivity.this, getString(R.string.facebookSuccess), Toast.LENGTH_LONG).show();
-                            if (Profile.getCurrentProfile() != null)
-                            {
+                            if (Profile.getCurrentProfile() != null) {
                                 stageHandler.newFacebookUser();
                             }
                         }
+
                         @Override
-                        public void onCancel()
-                        {
+                        public void onCancel() {
 
                         }
+
                         @Override
-                        public void onError(FacebookException exception)
-                        {
+                        public void onError(FacebookException exception) {
                             Toast.makeText(MainActivity.this, exception.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
 
             LoginManager.getInstance().logInWithReadPermissions(MainActivity.this, Arrays.asList("public_profile", "user_friends"));
         }
-        /*
-        b = (Button)findViewById((R.id.button));
-        b.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                goToStageActivity(v);
-            }
-        });
-        */
 
     }
     public void goToStageActivity(View view)
     {
-        Intent intent = new Intent(MainActivity.this, StageActivity.class);
-        startActivity(intent);
+        Stage thisStage = stageHandler.getStage(1);
+        if (thisStage != null)
+        {
+            Intent intent = new Intent(MainActivity.this, StageActivity.class);
+            startActivity(intent);
+        }
+        else
+        {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+            alertDialog.setMessage(getString(R.string.noStages)).create().show();
+        }
     }
     public void goToPreviousStagesActivity(View view)
     {
-        Intent intent = new Intent(MainActivity.this, PreviousStagesActivity.class);
-        startActivity(intent);
+        Stage thisStage = stageHandler.getStage(1);
+        if (thisStage != null)
+        {
+            Intent intent = new Intent(MainActivity.this, PreviousStagesActivity.class);
+            startActivity(intent);
+        }
+        else
+        {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+            alertDialog.setMessage(getString(R.string.noStages)).create().show();
+        }
     }
     public void goToLeaderboardsActivity(View view)
     {
@@ -95,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         {
             Intent intent = new Intent(MainActivity.this, LeaderboardsActivity.class);
             startActivity(intent);
+
         }
         else
         {
