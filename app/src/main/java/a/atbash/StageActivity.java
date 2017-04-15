@@ -51,7 +51,7 @@ public class StageActivity extends AppCompatActivity {
         editText =(EditText)findViewById(R.id.answer);
 
 
-        editTextClue=(EditText)findViewById(R.id.clue);//there is an clue??
+        editTextClue=(EditText)findViewById(R.id.clue);//there is an clue???
 
 
         editTextQ=(EditText)findViewById(R.id.question);//what did you do?
