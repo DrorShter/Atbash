@@ -15,23 +15,34 @@ public class PreviousStagesActivity extends AppCompatActivity
 {
     private int page = 1;
     private StageHandler stageHandler;
-    private int lastLevel; //last level the user succeeded
-    private final int NUMBER_OF_STAGES_IN_PAGE = 20;
+    private int CurrentStageNumber;
+    private static final int NUMBER_OF_STAGES_IN_PAGE = 20;
     private GestureDetectorCompat detector;
-    private int levelCount; //TODO: should be from db
+    private int count;
 
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        stageHandler= new StageHandler(this);
+        CurrentStageNumber=stageHandler.getCurrentStageNumber();
+        count=stageHandler.getCount();
+        setContentView(R.layout.previous_stages);
+        GridView gridview = (GridView) findViewById(R.id.gridview);
+        ButtonAdapter buttonAdapter = new ButtonAdapter(this);
+        gridview.setAdapter(buttonAdapter);
+    }
 
-    public class ButtonAdapter extends BaseAdapter
+    private class ButtonAdapter extends BaseAdapter
     {
         private Context mContext;
-        public ButtonAdapter(Context c) {
+        private ButtonAdapter(Context c) {
             mContext = c;
         }
         public int getCount()
         {
-            if (page == getLastPage(levelCount)) //if last page
+            if (page == getLastPage(count)) //if last page
             {
-                return levelCount % NUMBER_OF_STAGES_IN_PAGE;
+                return count % NUMBER_OF_STAGES_IN_PAGE;
             }
             else
             {
@@ -58,9 +69,10 @@ public class PreviousStagesActivity extends AppCompatActivity
             button.setLayoutParams(new GridView.LayoutParams(200, 100));
             button.setPadding(1, 1, 1, 1);
             button.setNumber(firstButtonOfPage(page) + position);
-            button.setText(Integer.toString(button.getNumber()));
-            button.setEnabled(lastLevel >= button.getNumber());
-            button.setOnClickListener(new View.OnClickListener() {
+            button.setText(String.valueOf(button.getNumber()));
+            button.setEnabled(CurrentStageNumber >= button.getNumber());
+            button.setOnClickListener(new View.OnClickListener()
+            {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(PreviousStagesActivity.this, StageActivity.class);
@@ -75,7 +87,7 @@ public class PreviousStagesActivity extends AppCompatActivity
             {
                 backpage.setVisibility(View.INVISIBLE);
             }
-            if (page == getLastPage(levelCount)) //if last page
+            if (page == getLastPage(count)) //if last page
             {
                 nextpage.setVisibility(View.INVISIBLE);
             }
@@ -99,26 +111,14 @@ public class PreviousStagesActivity extends AppCompatActivity
         gridview.setAdapter(buttonAdapter);
     }
 
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        stageHandler= new StageHandler(this);
-        lastLevel=stageHandler.getCurrentStageNumber();
-        levelCount=stageHandler.getCount();
-        setContentView(R.layout.previous_stages);
-        GridView gridview = (GridView) findViewById(R.id.gridview);
-        ButtonAdapter buttonAdapter = new ButtonAdapter(this);
-        gridview.setAdapter(buttonAdapter);
-    }
-
     private int firstButtonOfPage(int page)
     {
         return 1 + (page - 1) * NUMBER_OF_STAGES_IN_PAGE;
     }
 
-    private int getLastPage(int levelCount)
+    private int getLastPage(int count)
     {
-        return ((levelCount - 1) / NUMBER_OF_STAGES_IN_PAGE) + 1;
+        return ((count - 1) / NUMBER_OF_STAGES_IN_PAGE) + 1;
     }
 
     public void goToMainActivity(View view)

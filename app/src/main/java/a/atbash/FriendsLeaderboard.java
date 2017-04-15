@@ -3,7 +3,6 @@ package a.atbash;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,16 +13,11 @@ import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.net.URL;
 import java.util.List;
 
 public class FriendsLeaderboard extends Fragment
@@ -31,10 +25,10 @@ public class FriendsLeaderboard extends Fragment
     private static int COUNT_OF_PLAYERS = 10;
     private List<FacebookUser> facebookUsers = null;
     private final Logger logger = LoggerFactory.getLogger(LeaderboardsActivity.class);
-    public class TextViewAdapter  extends BaseAdapter
+    private class TextViewAdapter  extends BaseAdapter
     {
         private Context mContext;
-        public TextViewAdapter(Context c) {
+        private TextViewAdapter(Context c) {
             mContext = c;
         }
         public int getCount()
@@ -78,34 +72,33 @@ public class FriendsLeaderboard extends Fragment
         super.onCreate(savedInstanceState);
         final StageHandler stageHandler = new StageHandler(getContext());
         TextViewAdapter editTextAdapter = new TextViewAdapter(getActivity());
-        onCreateViewFacebookThread facebookThread = new onCreateViewFacebookThread();
-        Thread t = new Thread(facebookThread);
-        t.start();
+        Thread serverThread = new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                onCreateViewFacebookThread facebookThread = new onCreateViewFacebookThread();
+                final Thread t = new Thread(facebookThread);
+                t.start();
+                final String[] ids = facebookThread.getIds();
+                facebookUsers = stageHandler.getFacebookFriends(ids);
+            }
+        });
+        serverThread.start();
         try
         {
-            t.join();
-            final String[] ids = facebookThread.getIds();
-            Thread serverThread = new Thread(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    facebookUsers = stageHandler.getFacebookFriends(ids);
-                }
-            });
-            serverThread.start();
+            Thread.sleep(1000);
         }
         catch (InterruptedException e)
         {
-            logger.error("InterruptedException while joining the thread in LeaderboardsActivity", e.toString());
-            System.out.println("");
+            e.printStackTrace();
         }
         View view = inflater.inflate(R.layout.friends_leaderboard, container, false);
         GridView gridview = (GridView) view.findViewById(R.id.gridview);
         gridview.setAdapter(editTextAdapter);
         return view;
     }
-    public class onCreateViewFacebookThread implements Runnable
+    private class onCreateViewFacebookThread implements Runnable
     {
         private String[] ids = null;
         public void run()
@@ -137,7 +130,7 @@ public class FriendsLeaderboard extends Fragment
                 }
             }).executeAndWait();
         }
-        public String[] getIds()
+        private String[] getIds()
         {
             return ids;
         }

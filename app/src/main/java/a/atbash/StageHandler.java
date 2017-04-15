@@ -1,38 +1,26 @@
 package a.atbash;
 
 import android.content.Context;
-import android.hardware.camera2.params.Face;
-import com.uphyca.gradle.android.AndroidAspectJPlugin;
 import com.facebook.Profile;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.RunnableFuture;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
-public class StageHandler
+class StageHandler
 {
     private final Logger logger = LoggerFactory.getLogger(StageHandler.class);
     private StageDAL stageDAL;
     private final Context context;
     private String address;
-    public StageHandler(Context context)
+    StageHandler(Context context)
     {
         this.context = context;
         stageDAL = new StageDAL(context);
-        final String IP = "192.168.9.17";
+        final String IP = "192.168.9.27";
         final String port = "8080";
         address = "http://" + IP + ":" + port;
     }
@@ -52,21 +40,15 @@ public class StageHandler
 
     public int getCurrentStageNumber()
     {
-        int last = stageDAL.getCurrentStageNumber();
-        return last;
+        return stageDAL.getCurrentStageNumber();
     }
 
-    public void setCurrentStageNumber (int curLevel)
+    public void setCurrentStageNumber (int currentStage)
     {
-        int curLast = getCurrentStageNumber();
-        if (curLast < curLevel) //TODO: i think this is not necessary. need to check.
-        {
-            stageDAL.setCurrentStageNumber (curLevel);
-        }
+        stageDAL.setCurrentStageNumber (currentStage);
     }
     public void updateStagesFromServerIfNeeded()
     {
-
         Thread t = new Thread(new Runnable()
         {
             @Override
@@ -76,12 +58,9 @@ public class StageHandler
                 {
                     updateStagesFromServer();
                 }
-                System.out.println("end of thread");
             }
         });
-        System.out.println("start thread");
         t.start();
-        System.out.println("after thread");
     }
     public void updateStagesFromServer()
     {
@@ -132,26 +111,29 @@ public class StageHandler
 
     public void updateFacebookUser(int currentStageNumber)
     {
-        System.out.println("here");
         final boolean success = false;
         final FacebookUser user = new FacebookUser(getFacebookID(), getFacebookName(), currentStageNumber);
         if (user.getFacebookID() != null && user.getName() != null)
         {
-            final String send = address + "/updateFacebookUser/" + user.getFacebookID() + "/" + user.getName().replaceAll("\\s+","") + "/" + String.valueOf(user.getCurrentStageNumber());
+            final String send = address + "/updateFacebookUser/" + user.getFacebookID() +  "/" + user.getName().replaceAll("\\s+","") + "/"  + String.valueOf(user.getCurrentStageNumber());
             System.out.println(send);
-            Thread thread = new Thread(new Runnable() {
+            Thread thread = new Thread(new Runnable()
+            {
                 @Override
                 public void run() {
                     ObjectMapper objectMapper = new ObjectMapper();
                     Boolean b = false;
-                    try {
-                        b = objectMapper.readValue(new URL(send), new TypeReference<Boolean>() {
-                        });
-                        if (!b) {
+                    try
+                    {
+                        b = objectMapper.readValue(new URL(send), new TypeReference<Boolean>() {});
+                        if (!b)
+                        {
                             throw new Exception();
                         }
-                    } catch (Exception e) {
-                        logger.error("Exception in connection with RestAPI in updateFacebookUser in StageHandler", e.toString());
+                    }
+                    catch (Exception e)
+                    {
+                        logger.error("Exception in connection with RestAPI in updateFacebookUser in StageHandler" +e.toString(), e.toString());
                     }
                 }
             });
@@ -159,7 +141,8 @@ public class StageHandler
             try
             {
                 thread.join();
-            } catch (InterruptedException e) {
+            } catch (InterruptedException e)
+            {
                 logger.error("Exception in in joining the thread in updateFacebookUser in StageHandler", e.toString());
             }
         }
@@ -176,14 +159,22 @@ public class StageHandler
         ObjectMapper objectMapper = new ObjectMapper();
         try
         {
-            String send = address + "/getFacebookFriends/" + makeIdsOneString(ids);
-            System.out.println(send);
-            facebookUsers = objectMapper.readValue(new URL(send), new TypeReference<List<FacebookUser>>(){});
-            System.out.println(facebookUsers);
+            String idsString =  makeIdsOneString(ids);
+            if (!idsString.equals(""))
+            {
+                String send = address + "/getFacebookFriends/" + idsString;
+                System.out.println(send);
+                facebookUsers = objectMapper.readValue(new URL(send), new TypeReference<List<FacebookUser>>(){});
+                System.out.println(facebookUsers);
+            }
+            else
+            {
+                System.out.println("no friends found");
+            }
         }
         catch (Exception e)
         {
-            logger.error("Exception in connection with RestAPI in getFacebookFriendsThread in StageHandler", e.toString());
+            logger.error("Exception in connection with RestAPI in getFacebookFriends in StageHandler" + e.toString(), e.toString());
         }
         return facebookUsers;
     }
@@ -229,7 +220,6 @@ public class StageHandler
         private int count;
         public void run()
         {
-            System.out.println("InGetCountFromServerThread");
             ObjectMapper objectMapper = new ObjectMapper();
             try
             {
@@ -267,12 +257,21 @@ public class StageHandler
     private String makeIdsOneString(String[] ids)
     {
         String s = "";
-        for (int i=0;i<ids.length-1;i++)
+        if (ids != null)
         {
-            s += ids[i];
-            s += ",";
+            for (int i=0;i<ids.length-1;i++)
+            {
+                if (ids[i] != null)
+                {
+                    s += ids[i];
+                    s += ",";
+                }
+            }
+            if (ids[ids.length - 1] != null)
+            {
+                s+=ids[ids.length - 1];
+            }
         }
-        s+=ids[ids.length - 1];
         System.out.println(s);
         return s;
     }
