@@ -34,7 +34,7 @@ public class GlobalLeaderboard extends Fragment
             }
         });
         serverThread.start();
-        View view = inflater.inflate(R.layout.global_leaderboard, container, false);
+        View view = inflater.inflate(R.layout.global_leaderboard, container, false);//
         GridView gridview = (GridView) view.findViewById(R.id.gridview);
         gridview.setAdapter(editTextAdapter);
         return view;
