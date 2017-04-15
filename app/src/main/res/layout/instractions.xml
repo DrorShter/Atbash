@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:baselineAligned="false">
+
+    <Button
+        android:text="חזור"
+        android:layout_width="73dp"
+        android:layout_height="61dp"
+        android:background="@drawable/circle_blue"
+        android:id="@+id/button5"
+        android:onClick="goToMainActivity"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="הוראות"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:textStyle="bold"
+        android:id="@+id/textView2"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:layout_height="68dp"
+        android:layout_width="match_parent" />
+
+
+    <TextView
+        android:text= "@string/basic_text1"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/textView3"
+        android:layout_weight="0.97"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault"
+
+        />
+
+</LinearLayout>

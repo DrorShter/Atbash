@@ -1,7 +1,6 @@
 package a.atbash;
 
 import android.content.Context;
-import android.hardware.camera2.params.Face;
 
 import com.facebook.Profile;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -12,9 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class StageHandler
 {
@@ -119,7 +116,7 @@ public class StageHandler
         System.out.println("here");
         final boolean success = false;
         final FacebookUser user = new FacebookUser(getFacebookID(), getFacebookName(), currentStageNumber);
-        final String send = address + "/updateFacebookUser/" + user.getFacebookID() + "/" + user.getName().replaceAll("\\s+","") + "/" + String.valueOf(user.getCurrentStageNumber());
+        final String send = address + "/updateFacebookUser/" + user.getFacebookID() + "/" + user.getName().replaceAll("\\s+","") + "/" + String.valueOf(user. getCurrentStageNumber());
         System.out.println(send);
         Thread thread = new Thread(new Runnable()
         {

@@ -19,4 +19,16 @@ public class FacebookUser
     {
 
     }
+
+    public String getFacebookID() {
+        return this.facebookID;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public int getCurrentStageNumber() {
+        return this.currentStageNumber;
+    }
 }

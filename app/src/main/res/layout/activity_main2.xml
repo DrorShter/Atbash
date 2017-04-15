@@ -19,7 +19,8 @@
         android:layout_below="@+id/button3"
         android:layout_alignLeft="@+id/button3"
         android:layout_alignStart="@+id/button3"
-        android:layout_marginTop="13dp" />
+        android:layout_marginTop="13dp"
+        android:onClick="goToInstarctions" />
 
     <Button
         android:text="טבלת השיאים"
@@ -71,5 +72,18 @@
         android:layout_marginTop="119dp"
         android:layout_below="@+id/facebook_login_button"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Atbash"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:textColor="@color/black"
+        android:textSize="40dp"
+        android:gravity="center"
+        android:id="@+id/textView4"
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/facebook_login_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

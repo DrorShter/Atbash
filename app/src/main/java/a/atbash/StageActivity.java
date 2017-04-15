@@ -45,12 +45,18 @@ public class StageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Intent i = getIntent();
         stageHandler = new StageHandler(this);
-        stageNumber = i.getIntExtra("Stage", stageHandler.getLastLevel());//get the number of stage from previous stages activity or default - database
+        stageNumber = i.getIntExtra("Stage", stageHandler.getCurrentStageNumber());//get the number of stage from previous stages activity or default - database
         textViewStageNumber = (TextView) findViewById(R.id.textViewStageNumber);
         textViewStageNumber.setText(getString(R.string.stage) + " " + stageNumber);
         editText =(EditText)findViewById(R.id.answer);
-        editTextClue=(EditText)findViewById(R.id.clue);
-        editTextQ=(EditText)findViewById(R.id.question);
+
+
+        editTextClue=(EditText)findViewById(R.id.clue);//there is an clue??
+
+
+        editTextQ=(EditText)findViewById(R.id.question);//what did you do?
+
+
         back = (Button)findViewById(R.id.BACK);
         thisStage = stageHandler.getStage(stageNumber);
         Button[] b = new Button[30];
@@ -336,9 +342,9 @@ public class StageActivity extends AppCompatActivity {
             {
                 if((editText.getText().toString()).equals(thisStage.getAnswer()))
                 {
-                    if (stageHandler.getLastLevel() < thisStage.getNumber())
+                    if (stageHandler.getCurrentStageNumber() < thisStage.getNumber())
                     {
-                        stageHandler.updateLastLevel(thisStage.getNumber());
+                        stageHandler.setCurrentStageNumber(thisStage.getNumber());
                         Bundle param = new Bundle();
                         param.putInt("score", 11000);
                     }
