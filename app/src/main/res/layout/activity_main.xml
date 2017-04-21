@@ -374,8 +374,9 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:inputType="textMultiLine"
-        android:maxLength="17"
+        android:inputType="text"
+        android:maxLines="1"
+        android:maxLength="20"
         android:gravity="right"
         android:id="@+id/answer"
         tools:height="200dp"

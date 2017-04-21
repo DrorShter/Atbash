@@ -9,6 +9,10 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static android.R.id.input;
 
 class StageHandler
 {
@@ -115,6 +119,8 @@ class StageHandler
         final FacebookUser user = new FacebookUser(getFacebookID(), getFacebookName(), currentStageNumber);
         if (user.getFacebookID() != null && user.getName() != null)
         {
+            user.setName(hebrewToEnglish(user.getName()));
+            System.out.println("after hebrew to english");
             final String send = address + "/updateFacebookUser/" + user.getFacebookID() +  "/" + user.getName().replaceAll("\\s+","") + "/"  + String.valueOf(user.getCurrentStageNumber());
             System.out.println(send);
             Thread thread = new Thread(new Runnable()
@@ -274,5 +280,104 @@ class StageHandler
         }
         System.out.println(s);
         return s;
+    }
+    private String hebrewToEnglish(String hebrew)
+    {
+        String english = "";
+        if (hebrew.matches (".*[א-ת]+.*"))
+        {
+            english += "@";
+            for (int i=0;i<hebrew.length();i++)
+            {
+                switch(hebrew.charAt(i))
+                {
+                    case 'א':
+                        english += 'a';
+                        break;
+                    case 'ב' :
+                        english += "b";
+                        break;
+                    case 'ג':
+                        english += 'c';
+                        break;
+                    case 'ד':
+                        english += 'd';
+                        break;
+                    case 'ה':
+                        english += 'e';
+                        break;
+                    case 'ו':
+                        english += 'f';
+                        break;
+                    case 'ז':
+                        english += 'g';
+                        break;
+                    case 'ח':
+                        english += 'h';
+                        break;
+                    case 'ט':
+                        english += 'i';
+                        break;
+                    case 'י':
+                        english += 'j';
+                        break;
+                    case 'כ':
+                        english += 'k';
+                        break;
+                    case 'ל':
+                        english += 'l';
+                        break;
+                    case 'מ':
+                        english += 'm';
+                        break;
+                    case 'נ':
+                        english += 'n';
+                        break;
+                    case 'ס':
+                        english += 'o';
+                        break;
+                    case 'ע':
+                        english += 'p';
+                        break;
+                    case 'פ':
+                        english += 'q';
+                        break;
+                    case 'צ':
+                        english += 'r';
+                        break;
+                    case 'ק':
+                        english += 's';
+                        break;
+                    case 'ר':
+                        english += 't';
+                        break;
+                    case 'ש':
+                        english += 'u';
+                        break;
+                    case 'ת':
+                        english += 'v';
+                        break;
+                    case 'ך':
+                        english += 'w';
+                        break;
+                    case 'ם':
+                        english += 'x';
+                        break;
+                    case 'ן':
+                        english += 'y';
+                        break;
+                    case 'ף':
+                        english += 'z';
+                        break;
+                    case 'ץ':
+                        english += '#';
+                        break;
+                    default:
+                        english += hebrew.charAt(i);
+                }
+            }
+        }
+        System.out.println("english = " + english);
+        return english;
     }
 }
