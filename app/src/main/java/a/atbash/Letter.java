@@ -1,22 +1,14 @@
 package a.atbash;
-//TODO: LOMBOK
 import android.widget.Button;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+@AllArgsConstructor(suppressConstructorProperties = true)
 class Letter
 {
     private String value;
     private Button button;
-    Letter(String value, Button b)
-    {
-        this.value = value;
-        this.button = b;
-    }
-    String getValue()
-    {
-        return value;
-    }
-    public Button getButton()
-    {
-        return button;
-    }
 }
