@@ -33,7 +33,6 @@
     <string name="successInStage3">"כלי!!!"</string>
     <string name="nextStage">"לשאלה הבאה"</string>
     <string name="finsihedAllLevels">"כל הכבוד! השלמת את כל השלבים. בקרוב נוסיף שלבים חדשים."</string>
-    <string name="backToMainMenuAfterFinishAllLevels">"בחזרה לתפריט  הראשי"</string>
     <string name="facebook_app_id">1876071789305774</string>
     <string name="fb_login_protocol_scheme">fbAPP_ID</string>
     <string name="fb_share_button">fbAPP_ID</string>
@@ -49,8 +48,8 @@
     <string name="stage">שלב</string>
     <string name="facebookSuccess">מחובר לפייסבוק</string>
     <string name="ok">אישור</string>
-    <string name="noStages">אין שלבים במאגר</string>
-    <string name="instractions">הוראות</string>
+    <string name="noStages">אין שלבים במאגר השאלות. בדוק את החיבור לאינטרנט ונסה שוב מאוחר יותר.</string>
+    <string name="instructions">הוראות</string>
     <string name="failedLoadingLeaderboards">אין אפשרות לקבל רשימת חברים</string>
     <string name="basic_text1">שלום לכל המשתמשים\n בכל שלב תוצג לכם חידה שהתשובה לה מוצפנת\nהמטרה שלכם היא לפצח את ההצפנה\nאם אתם מתקשים תשתמשו בכפתור הרמז שיעזור לכם לגלות את סוג ההצפנה\nתודה על שהתקנתם את המשחק\n\nקרדיטים\nתודה להורינו שהביאונו עד הלום\nלמנטור התותח שלנו רן הנסיך הקטן טיבי\nלמדריך הכי טוב בארץ מיכאל ויינר\nלכיתה יב 5 שהיו שותפים איתנו לתהליך\nוכמובן לגוגל שברא לנו את stack overflow \t\tשלא היינו מסתדרים בלעדיהם</string>
 </resources>
