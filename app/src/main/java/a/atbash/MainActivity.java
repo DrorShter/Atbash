@@ -31,22 +31,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-/*
-        try {
-            System.out.println("hihihihihihihihihihihih");
-            PackageInfo info = getPackageManager().getPackageInfo(
-                    "a.atbash",
-                    PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-
-        } catch (NoSuchAlgorithmException e) {
-
-        }*/
         setContentView(R.layout.activity_main2);
         stageHandler=new StageHandler(this);
         stageHandler.updateStagesFromServerIfNeeded();
