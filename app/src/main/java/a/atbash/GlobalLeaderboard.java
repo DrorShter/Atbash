@@ -65,7 +65,7 @@ public class GlobalLeaderboard extends Fragment
             {
                 if (facebookUsers.get(position/2) != null)
                 {
-                    if (position%2 == 0) //if Name
+                            if (position%2 == 0) //if Name
                     {
                         textView.setText(facebookUsers.get(position/2).getName());//
                     }

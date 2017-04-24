@@ -1,18 +1,17 @@
 package a.atbash;
 
 import android.content.Context;
+
 import com.facebook.Profile;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import static android.R.id.input;
 
 class StageHandler
 {
@@ -24,7 +23,7 @@ class StageHandler
     {
         this.context = context;
         stageDAL = new StageDAL(context);
-        final String IP = "192.168.9.27";
+        final String IP = "192.168.0.60";
         final String port = "8080";
         address = "http://" + IP + ":" + port;
     }

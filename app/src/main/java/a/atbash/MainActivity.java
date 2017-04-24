@@ -4,24 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,6 +31,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+/*
+        try {
+            System.out.println("hihihihihihihihihihihih");
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "a.atbash",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }*/
         setContentView(R.layout.activity_main2);
         stageHandler=new StageHandler(this);
         stageHandler.updateStagesFromServerIfNeeded();
@@ -82,6 +95,11 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
             alertDialog.setMessage(getString(R.string.noStages)).create().show();
         }
+    }
+    public void goToInstractions(View view)
+    {
+        Intent intent = new Intent(MainActivity.this, InstractionsActivity.class);
+        startActivity(intent);
     }
     public void goToPreviousStagesActivity(View view)
     {
