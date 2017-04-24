@@ -12,6 +12,7 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
@@ -30,8 +31,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        System.out.println(FacebookSdk.getApplicationSignature(getApplicationContext()));
         stageHandler=new StageHandler(this);
         stageHandler.updateStagesFromServerIfNeeded();
         if (FirstTimeInMainActivity)

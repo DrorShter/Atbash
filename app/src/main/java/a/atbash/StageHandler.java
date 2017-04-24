@@ -22,7 +22,7 @@ class StageHandler
     {
         this.context = context;
         stageDAL = new StageDAL(context);
-        final String IP = "169.254.153.62";
+        final String IP = "192.168.14.74";
         final String port = "8080";
         address = "http://" + IP + ":" + port;
     }
@@ -117,7 +117,9 @@ class StageHandler
         final FacebookUser user = new FacebookUser(getFacebookID(), getFacebookName(), currentStageNumber);
         if (user.getFacebookID() != null && user.getName() != null)
         {
+            System.out.println(user.getName());
             user.setName(hebrewToEnglish(user.getName()));
+            System.out.println(user.getName());
             System.out.println("after hebrew to english");
             final String send = address + "/updateFacebookUser/" + user.getFacebookID() +  "/" + user.getName().replaceAll("\\s+","") + "/"  + String.valueOf(user.getCurrentStageNumber());
             System.out.println(send);
@@ -285,14 +287,12 @@ class StageHandler
         if (hebrew.matches (".*[א-ת]+.*"))
         {
             english += "@";
-            for (int i=0;i<hebrew.length();i++)
-            {
-                switch(hebrew.charAt(i))
-                {
+            for (int i=0;i<hebrew.length();i++) {
+                switch (hebrew.charAt(i)) {
                     case 'א':
                         english += 'a';
                         break;
-                    case 'ב' :
+                    case 'ב':
                         english += "b";
                         break;
                     case 'ג':
@@ -374,6 +374,10 @@ class StageHandler
                         english += hebrew.charAt(i);
                 }
             }
+        }
+        else
+        {
+            english=hebrew;
         }
         System.out.println("english = " + english);
         return english;
