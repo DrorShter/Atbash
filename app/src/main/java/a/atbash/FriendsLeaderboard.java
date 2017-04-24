@@ -48,15 +48,18 @@ public class FriendsLeaderboard extends Fragment
             textView.setPadding(1, 1, 1, 1);
             if (facebookUsers != null)
             {
-                if (facebookUsers.get(position/2) != null)
+                if (position/2 < facebookUsers.size())
                 {
-                    if (position % 2 == 0) //if Name
+                    if (facebookUsers.get(position/2) != null)
                     {
-                        textView.setText(facebookUsers.get(position / 2).getName());
-                    }
-                    else //if CurrentStageNumber
-                    {
-                        textView.setText("" + facebookUsers.get(position / 2).getCurrentStageNumber());
+                        if (position % 2 == 0) //if Name
+                        {
+                            textView.setText(facebookUsers.get(position / 2).getName());
+                        }
+                        else //if CurrentStageNumber
+                        {
+                            textView.setText("" + facebookUsers.get(position / 2).getCurrentStageNumber());
+                        }
                     }
                 }
             }
