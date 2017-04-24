@@ -1,7 +1,6 @@
 package a.atbash;
 
 import android.content.Context;
-
 import com.facebook.Profile;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
