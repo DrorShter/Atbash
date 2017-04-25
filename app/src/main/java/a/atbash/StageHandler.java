@@ -1,6 +1,7 @@
 package a.atbash;
 
 import android.content.Context;
+
 import com.facebook.Profile;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 
 class StageHandler
@@ -123,33 +125,29 @@ class StageHandler
             System.out.println("after hebrew to english");
             final String send = address + "/updateFacebookUser/" + user.getFacebookID() +  "/" + user.getName().replaceAll("\\s+","") + "/"  + String.valueOf(user.getCurrentStageNumber());
             System.out.println(send);
-            Thread thread = new Thread(new Runnable()
-            {
-                @Override
-                public void run() {
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    Boolean b = false;
-                    try
-                    {
-                        b = objectMapper.readValue(new URL(send), new TypeReference<Boolean>() {});
-                        if (!b)
-                        {
-                            throw new Exception();
+            if(isConnectedToServer(address,100)==true) {
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ObjectMapper objectMapper = new ObjectMapper();
+                        Boolean b = false;
+                        try {
+                            b = objectMapper.readValue(new URL(send), new TypeReference<Boolean>() {
+                            });
+                            if (!b) {
+                                throw new Exception();
+                            }
+                        } catch (Exception e) {
+                            logger.error("Exception in connection with RestAPI in updateFacebookUser in StageHandler" + e.toString(), e.toString());
                         }
                     }
-                    catch (Exception e)
-                    {
-                        logger.error("Exception in connection with RestAPI in updateFacebookUser in StageHandler" +e.toString(), e.toString());
-                    }
+                });
+                thread.start();
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    logger.error("Exception in in joining the thread in updateFacebookUser in StageHandler", e.toString());
                 }
-            });
-            thread.start();
-            try
-            {
-                thread.join();
-            } catch (InterruptedException e)
-            {
-                logger.error("Exception in in joining the thread in updateFacebookUser in StageHandler", e.toString());
             }
         }
     }
@@ -229,8 +227,16 @@ class StageHandler
             ObjectMapper objectMapper = new ObjectMapper();
             try
             {
-                count = objectMapper.readValue(new URL(address + "/getCount"), new TypeReference<Integer>(){});
-                System.out.println(count);
+                if(isConnectedToServer(address, 100)==true) {
+                    count = objectMapper.readValue(new URL(address + "/getCount"), new TypeReference<Integer>() {
+                    });
+                    System.out.println(count);
+                }
+                else
+                {
+                    count=-1;
+
+                }
             }
             catch (Exception e)
             {
@@ -381,5 +387,16 @@ class StageHandler
         }
         System.out.println("english = " + english);
         return english;
+    }
+    public boolean isConnectedToServer(String url, int timeout) {
+        try{
+            URL myUrl = new URL(url);
+            URLConnection connection = myUrl.openConnection();
+            connection.setConnectTimeout(timeout);
+            connection.connect();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
