@@ -18,14 +18,16 @@ import java.util.Random;
 
 public class StageActivity extends AppCompatActivity {
 
-    private Stage thisStage = new Stage();
-    private EditText editText;
-    private TextView stageNumberTextView, questionTextView;
-    private StageHandler stageHandler;
-    private String messageToShare = "";
-    private static final int SUCCESS = 0;
-    private static final int NO_MORE_STAGES = 1;
+    private Stage thisStage = new Stage(); //member
+    private EditText editText; //member
+    private TextView stageNumberTextView, questionTextView; //member
+    private StageHandler stageHandler; //member
+    private String messageToShare = ""; //member
+    private static final int SUCCESS = 0; //member
+    private static final int NO_MORE_STAGES = 1; //member
 
+    //This function gets Bundle and returns void
+    //This function is onCreate function
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -73,7 +75,7 @@ public class StageActivity extends AppCompatActivity {
         letters.add(new Letter(getString(R.string.tzadickSofit), (Button)findViewById((R.id.n26))));
         letters.add(new Letter(getString(R.string.peiSofit), (Button)findViewById((R.id.n27))));
         letters.add(new Letter(".", (Button)findViewById((R.id.n28))));
-        for (int i=0;i<letters.size();i++)
+        for (int i=0;i<letters.size();i++) //set CustomOnClickListener to all letters
         {
             Letter letter = letters.get(i);
             letter.getButton().setOnClickListener(new CustomOnClickListener(letter, editText){});
@@ -101,7 +103,7 @@ public class StageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                if((editText.getText().toString()).equals(thisStage.getAnswer()))
+                if((editText.getText().toString()).equals(thisStage.getAnswer())) //if success
                 {
                     if (stageHandler.getCurrentStageNumber() == thisStage.getNumber())
                     {
@@ -110,7 +112,7 @@ public class StageActivity extends AppCompatActivity {
                     Stage temp  = stageHandler.getNextStage(thisStage.getNumber());
                     if (temp != null)
                     {
-                        dialogManager(SUCCESS, temp);
+                        dialogManager(SUCCESS, temp); //pop-up
                         thisStage = temp;
                         questionTextView.setText(thisStage.getQuestion());
                         stageNumberTextView.setText(getString(R.string.stage) + " " + String.valueOf(thisStage.getNumber()));
@@ -118,14 +120,14 @@ public class StageActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        dialogManager(NO_MORE_STAGES, null);
+                        dialogManager(NO_MORE_STAGES, null); //pop-up
                     }
                 }
-                else
+                else //if wrong
                 {
                     final AlertDialog.Builder builder = new AlertDialog.Builder(StageActivity.this).setMessage(getString(R.string.wrong));
                     final AlertDialog wrongAnswer = builder.show();
-                    new android.os.CountDownTimer(1500, 1500)
+                    new android.os.CountDownTimer(1500, 1500) //set time for showing pop-up
                     {
                         public void onTick(long millisUntilFinished)
                         {
@@ -149,12 +151,18 @@ public class StageActivity extends AppCompatActivity {
             }
         });
     }
+
+    //This function gets View and returns void
+    //This function moves player to MainActivity
     public void goToMainActivity(View view)
     {
         Intent intent = new Intent(StageActivity.this, MainActivity.class);
         startActivity(intent);
     }
-    public void dialogManager(int option, final Stage temp)
+
+    //This function gets int, Stage and returns void
+    //This function responsible on pop-ups
+    public void dialogManager(int option, Stage temp)
     {
         String alertText = "", positiveButtonText = "", negativeButtonText = "";
         DialogInterface.OnClickListener positiveDialogInterface = null, negativeDialogInterface = null;
@@ -212,6 +220,9 @@ public class StageActivity extends AppCompatActivity {
         };
         showDialog(alertText, positiveButtonText, negativeButtonText, positiveDialogInterface, negativeDialogInterface);
     }
+
+    //This function gets String,String,String,DialogInterface.OnClickListener,DialogInterface.OnClickListener and returns void
+    //This function responsible on pop-ups
     private void showDialog(String alertText, String positiveButtonText, String negativeButtonText,DialogInterface.OnClickListener positiveDialogInterface, DialogInterface.OnClickListener negativeDialogInterface)
     {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(StageActivity.this);

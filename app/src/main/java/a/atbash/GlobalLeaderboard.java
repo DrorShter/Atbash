@@ -16,9 +16,9 @@ import java.util.List;
 
 public class GlobalLeaderboard extends Fragment
 {
-    private static int COUNT_OF_PLAYERS = 10;
-    private boolean alert = false;
-    private List<FacebookUser> facebookUsers = null;
+    private static int COUNT_OF_PLAYERS = 10; //count of players
+    private boolean alert = false; //member
+    private List<FacebookUser> facebookUsers = null; //list
     private final Logger logger = LoggerFactory.getLogger(LeaderboardsActivity.class);
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -41,11 +41,11 @@ public class GlobalLeaderboard extends Fragment
     }
     private class TextViewAdapter  extends BaseAdapter
     {
-        private Context mContext;
+        private Context mContext; //member
         private TextViewAdapter(Context c)
         {
             mContext = c;
-        }
+        } //member
         public int getCount()
         {
             return COUNT_OF_PLAYERS * 2;
@@ -63,11 +63,11 @@ public class GlobalLeaderboard extends Fragment
             textView.setPadding(1, 1, 1, 1);
             if (facebookUsers != null)
             {
-                if (facebookUsers.get(position/2) != null)
+                if (facebookUsers.size() > position/2 && facebookUsers.get(position/2) != null)
                 {
-                            if (position%2 == 0) //if Name
+                    if (position%2 == 0) //if Name
                     {
-                        textView.setText(facebookUsers.get(position/2).getName());//
+                        textView.setText(facebookUsers.get(position/2).getName());
                     }
                     else //if CurrentStageNumber
                     {
@@ -78,7 +78,7 @@ public class GlobalLeaderboard extends Fragment
             }
             else
             {
-                if (!alert)
+                if (!alert) //pop-up
                 {
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
                     alertDialog.setMessage(getString(R.string.failedLoadingLeaderboards)).create().show();

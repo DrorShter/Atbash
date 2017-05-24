@@ -9,8 +9,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor(suppressConstructorProperties = true)
 class Stage {
-    private int number;
-    private String question;
-    private String clue;
-    private String answer;
+    private int number; //id
+    private String question; //question
+    private String clue; //clue for question
+    private String answer; //answer for question
 }

@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor(suppressConstructorProperties = true)
 class FacebookUser
 {
-    private String facebookID;
-    private String name;
-    private int currentStageNumber;
+    private String facebookID; //id
+    private String name; //name
+    private int currentStageNumber; //stage
 }

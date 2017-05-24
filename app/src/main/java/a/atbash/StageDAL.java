@@ -13,9 +13,10 @@ import java.util.Scanner;
 
 class StageDAL
 {
-    private final Logger logger = LoggerFactory.getLogger(StageDAL.class);
-    private ObjectMapper mapper=null;
-    private File path;
+    private final Logger logger = LoggerFactory.getLogger(StageDAL.class); //member
+    private ObjectMapper mapper=null; //member
+    private File path; //member
+    //constructor
     StageDAL(Context context)
     {
         path=new File(context.getFilesDir(), "stages");
@@ -25,17 +26,23 @@ class StageDAL
             path.mkdirs();
         }
     }
+
+    //This function gets int and returns Stage
+    //This function returns stage from file
     Stage getStage(int num) throws IOException
     {
         ObjectMapper mapper=new ObjectMapper();
-        File file = new File(path, num + ".json");
+        File file = new File(path, num + ".json"); //file
         return mapper.readValue(file, Stage.class);
     }
+
+    //This function gets int and returns int
+    //This function returns CurrentStageNumber from file
     public int getCurrentStageNumber()
     {
-        File file = new File(path, "currentLevel.txt");
+        File file = new File(path, "currentLevel.txt"); //file
         String s1 = "";
-        if(!file.exists())
+        if(!file.exists()) //if exist
         {
             file.getParentFile().mkdirs();
             FileOutputStream stream = null;
@@ -51,7 +58,7 @@ class StageDAL
             }
             return 1;
         }
-        else
+        else //if not exist
         {
             Scanner scanner= null;
             try
@@ -71,6 +78,9 @@ class StageDAL
         }
 
     }
+
+    //This function gets int and returns void
+    //This function set CurrentStageNumber on file
     public void setCurrentStageNumber(int cur)
     {
         File file = new File(path, "currentLevel.txt");
@@ -90,6 +100,8 @@ class StageDAL
         }
     }
 
+    //This function gets List<Stage> and returns void
+    //This function update the stages from server
     public void updateStagesFromServer(List<Stage> stages) throws IOException
     {
         Stage stage=null;
@@ -101,6 +113,8 @@ class StageDAL
         }
     }
 
+    //This function gets void and returns int
+    //This function return number of files of stages (count)
     public int getCount()
     {
         return path.listFiles().length-1;

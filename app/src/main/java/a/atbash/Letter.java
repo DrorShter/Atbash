@@ -9,6 +9,6 @@ import lombok.Setter;
 @AllArgsConstructor(suppressConstructorProperties = true)
 class Letter
 {
-    private String value;
-    private Button button;
+    private String value; //value of letter
+    private Button button; //button of letter
 }

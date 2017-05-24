@@ -22,25 +22,27 @@ import java.util.List;
 
 public class FriendsLeaderboard extends Fragment
 {
-    private static int COUNT_OF_PLAYERS = 10;
-    private List<FacebookUser> facebookUsers = null;
-    private final Logger logger = LoggerFactory.getLogger(LeaderboardsActivity.class);
+    private static int COUNT_OF_PLAYERS = 10; //count of players to display
+    private List<FacebookUser> facebookUsers = null; //declare
+    private final Logger logger = LoggerFactory.getLogger(LeaderboardsActivity.class); //declare
     private class TextViewAdapter  extends BaseAdapter
     {
-        private Context mContext;
+        private Context mContext; //member
         private TextViewAdapter(Context c) {
             mContext = c;
-        }
+        } //member
         public int getCount()
         {
             return COUNT_OF_PLAYERS * 2;
-        }
+        } //return the count of players*2
         public Object getItem(int position) {
             return null;
-        }
+        } //return null
         public long getItemId(int position) {
             return 0;
-        }
+        } //return 0
+        //This function gets int, View, ViewGroup and returns View
+        //This function actually responsible on displaying the leaderboard properly
         public View getView(int position, View convertView, ViewGroup parent)
         {
             TextView textView = new TextView(getActivity());
@@ -70,6 +72,9 @@ public class FriendsLeaderboard extends Fragment
             return textView;
         }
     }
+
+    //This function gets LayoutInflater, ViewGroup, Bundle and returns View
+    //This function gets the info from server using multithreading
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -101,9 +106,11 @@ public class FriendsLeaderboard extends Fragment
         gridview.setAdapter(editTextAdapter);
         return view;
     }
+
+    //the thread of facebook
     private class onCreateViewFacebookThread implements Runnable
     {
-        private String[] ids = null;
+        private String[] ids = null; //declare
         public void run()
         {
             new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/friends", null, HttpMethod.GET, new GraphRequest.Callback() {
@@ -136,6 +143,6 @@ public class FriendsLeaderboard extends Fragment
         private String[] getIds()
         {
             return ids;
-        }
+        } //return ids
     }
 }

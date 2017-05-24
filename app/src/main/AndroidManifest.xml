@@ -26,7 +26,7 @@
         <activity android:name=".StageActivity" android:screenOrientation="portrait"/>
         <activity android:name=".PreviousStagesActivity" android:screenOrientation="portrait"/>
         <activity android:name=".LeaderboardsActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".InstractionsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".InstructionsActivity" android:screenOrientation="portrait"/>
 
 
         <activity
