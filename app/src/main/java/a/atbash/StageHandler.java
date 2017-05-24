@@ -296,7 +296,7 @@ class StageHandler
     }
 
     //This function gets String[] and returns String
-    //This function make all ids one string before sending
+    //This function make all ids to one string before sending
     private String makeIdsOneString(String[] ids)
     {
         String s = "";
