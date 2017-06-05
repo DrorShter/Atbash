@@ -23,7 +23,7 @@ class StageHandler
     {
         this.context = context;
         stageDAL = new StageDAL(context);
-        final String IP = "192.168.9.24"; //set ip
+        final String IP = "192.168.43.35"; //set ip
         final String port = "8080"; //set port
         address = "http://" + IP + ":" + port; //set adress
     }
