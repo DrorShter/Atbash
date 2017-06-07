@@ -1,4 +1,5 @@
 package a.atbash;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,9 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor(suppressConstructorProperties = true)
-class Stage {
-    private int number; //id
-    private String question; //question
-    private String clue; //clue for question
-    private String answer; //answer for question
+class FacebookUser
+{
+    private String facebookID; //id
+    private String name; //name
+    private int currentStageNumber; //stage
 }

@@ -10,30 +10,16 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="a.atbash.StageActivity">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:maxLines="8"
-        android:lines="8"
-        android:id="@+id/clue"
-        tools:height="200dp"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:layout_above="@+id/checkButton"
-        android:layout_alignTop="@+id/clueButton"
-        android:layout_alignRight="@+id/checkAns"
-        android:layout_alignEnd="@+id/checkAns"
-        android:layout_toRightOf="@+id/checkButton"
-        android:layout_toEndOf="@+id/checkButton" />
-
     <Button
         android:layout_width="38dp"
         android:layout_height= "40dp"
         android:text = "ך"
+        android:textSize="22dp"
         android:id = "@+id/n25"
+        android:background="@drawable/letter"
+        android:textColor="@color/defaultLetterColor"
         android:layout_marginBottom="40dp"
-        android:layout_marginLeft="253dp"
+        android:layout_marginLeft="269dp"
         android:layout_alignBottom="@+id/gridLayout"
         />
 
@@ -41,50 +27,51 @@
         android:layout_width="38dp"
         android:layout_height= "40dp"
         android:text = "ץ"
+        android:textSize="22dp"
         android:id = "@+id/n26"
+        android:background="@drawable/letter"
+        android:textColor="@color/defaultLetterColor"
         android:layout_marginBottom="0dp"
-        android:layout_marginLeft="253dp"
+        android:layout_marginLeft="269dp"
         android:layout_alignBottom="@+id/gridLayout"/>
 
     <Button
         android:layout_width="38dp"
         android:layout_height= "40dp"
         android:text = "ף"
+        android:textSize="22dp"
         android:id = "@+id/n27"
+        android:background="@drawable/letter"
+        android:textColor="@color/defaultLetterColor"
         android:layout_marginBottom="40dp"
-        android:layout_marginLeft="285dp"
+        android:layout_marginLeft="302dp"
         android:layout_alignBottom="@+id/gridLayout"
         />
     <Button
         android:layout_width="38dp"
         android:layout_height= "40dp"
         android:text = "."
+        android:textSize="22dp"
+        android:background="@drawable/letter"
+        android:textColor="@color/defaultLetterColor"
         android:id = "@+id/n28"
         android:layout_marginBottom="0dp"
-        android:layout_marginLeft="285dp"
         android:layout_alignBottom="@+id/gridLayout"
-        />
+        android:layout_alignTop="@+id/n26"
+        android:layout_alignLeft="@+id/n27"
+        android:layout_alignStart="@+id/n27" />
     <Button
-        android:layout_width="70dp"
+        android:layout_width="71dp"
         android:layout_height= "40dp"
         android:text = "->"
+        android:textSize="22dp"
         android:id = "@+id/n29"
+        android:background="@drawable/letter"
+        android:textColor="@color/defaultLetterColor"
         android:layout_marginBottom="80dp"
-        android:layout_marginLeft="253dp"
+        android:layout_marginLeft="269dp"
         android:layout_alignBottom="@+id/gridLayout"
         />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editText"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:layout_above="@+id/gridLayout"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
     <GridLayout
         android:layout_width="wrap_content"
@@ -92,8 +79,7 @@
         android:orientation = "horizontal"
         android:columnCount="8"
         android:id="@+id/gridLayout"
-        android:layout_marginBottom="50dp"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/n30"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
@@ -101,7 +87,10 @@
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "ק"
-            android:layout_marginLeft="-6dp"
+            android:layout_marginLeft="9dp"
+            android:textSize="22dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n1"
             />
         <Button
@@ -109,146 +98,209 @@
             android:layout_height= "40dp"
             android:text = "ר"
             android:layout_marginLeft="-6dp"
+            android:textSize="22dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n2"
             />
         <Button
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "א"
+            android:textSize="22dp"
             android:layout_marginLeft="-6dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n3"
             />
         <Button
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "ט"
+            android:textSize="22dp"
             android:layout_marginLeft="-6dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n4"
             />
         <Button
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "ו"
+            android:textSize="22dp"
             android:layout_marginLeft="-6dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n5"
             />
         <Button
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "ן"
+            android:textSize="22dp"
             android:layout_marginLeft="-6dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n6"
             />
         <Button
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "ם"
+            android:textSize="22dp"
             android:layout_marginLeft="-6dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n7"
             />
         <Button
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "פ"
+            android:textSize="22dp"
             android:layout_marginLeft="-6dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n8"
             />
         <Button
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "ש"
-            android:layout_marginLeft="-6dp"
+            android:textSize="22dp"
+            android:layout_marginLeft="9dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n9"
             />
         <Button
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "ד"
+            android:textSize="22dp"
             android:layout_marginLeft="-6dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n10"
             />
         <Button
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "ג"
+            android:textSize="22dp"
             android:layout_marginLeft="-6dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n11"
         />
         <Button
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "כ"
+            android:textSize="22dp"
             android:layout_marginLeft="-6dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n12"
             />
         <Button
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "ע"
+            android:textSize="22dp"
             android:layout_marginLeft="-6dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n13"
             />
         <Button
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "י"
+            android:textSize="22dp"
             android:layout_marginLeft="-6dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n14"
             />
         <Button
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "ח"
+            android:textSize="22dp"
             android:layout_marginLeft="-6dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n15"
             />
         <Button
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "ל"
+            android:textSize="22dp"
             android:layout_marginLeft="-6dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n16"
             />
         <Button
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "ז"
-            android:layout_marginLeft="-6dp"
+            android:textSize="22dp"
+            android:layout_marginLeft="9dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n17"
             />
         <Button
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "ס"
+            android:textSize="22dp"
             android:layout_marginLeft="-6dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n18"
             />
         <Button
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "ב"
+            android:textSize="22dp"
             android:layout_marginLeft="-6dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n19"
             />
         <Button
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "ה"
+            android:textSize="22dp"
             android:layout_marginLeft="-6dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n20"
             />
         <Button
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "נ"
+            android:textSize="22dp"
             android:layout_marginLeft="-6dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n21"
             />
         <Button
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "מ"
+            android:textSize="22dp"
             android:layout_marginLeft="-6dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n22"
             />
         <Button
@@ -256,89 +308,113 @@
             android:layout_height= "40dp"
             android:text = "צ"
             android:layout_marginLeft="-6dp"
+            android:textSize="22dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n23"
             />
         <Button
             android:layout_width="38dp"
             android:layout_height= "40dp"
             android:text = "ת"
+            android:textSize="22dp"
             android:layout_marginLeft="-6dp"
+            android:background="@drawable/letter"
+            android:textColor="@color/defaultLetterColor"
             android:id = "@+id/n24"
             />
     </GridLayout>
 
     <Button
-        android:text="חזור"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/BACK"
-        android:onClick="sendMessage"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
         android:text="בדיקה"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_gold"
         android:id="@+id/checkButton"
-        android:layout_above="@+id/editText"
+        android:layout_above="@+id/gridLayout"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="19dp" />
+        android:layout_marginBottom="11dp" />
+
+    <Button
+        android:text="חזור"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/circle_blue"
+        android:id="@+id/BACK"
+        android:onClick="goToMainActivity"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:text="רמז"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/circle_red"
         android:id="@+id/clueButton"
-        android:layout_above="@+id/checkButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/gridLayout"
+        android:layout_alignEnd="@+id/gridLayout"
+        android:layout_marginRight="21dp"
+        android:layout_marginEnd="21dp" />
+
+    <Button
+        android:text="רווח"
+        android:layout_height="50dp"
+        android:layout_width="330dp"
+        android:layout_alignLeft="@id/gridLayout"
+        android:layout_alignStart="@id/gridLayout"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/n30"
+        android:background="@drawable/rectangle_turquoise"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        android:inputType="text"
+        android:maxLines="1"
+        android:maxLength="20"
+        android:gravity="right"
+        android:id="@+id/answer"
+        tools:height="200dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:layout_above="@+id/n29"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/checkButton"
+        android:layout_toRightOf="@+id/checkButton"
+        android:layout_toEndOf="@+id/checkButton" />
+
+    <TextView
+        android:text="שלב X"
+        android:layout_width="180dp"
+        android:layout_height="110dp"
+        android:id="@+id/textViewStageNumber"
+        android:textSize="32sp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/question" />
+
+    <TextView
+        android:layout_width="330dp"
+        android:layout_height="170dp"
         android:inputType="textMultiLine"
         android:maxLines="8"
         android:lines="8"
         android:id="@+id/question"
-        tools:height="200dp"
+        android:textSize="26dp"
+        android:gravity="center"
         android:focusable="false"
+        android:background="@drawable/rectangle_gray"
         android:focusableInTouchMode="false"
         android:layout_below="@+id/BACK"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/clue"
-        android:layout_alignEnd="@+id/clue"
-        android:layout_above="@+id/clue" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:maxLines="8"
-        android:lines = "8"
-        android:id="@+id/checkAns"
-        tools:height="200dp"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:layout_below="@+id/clue"
-        android:layout_alignRight="@+id/n25"
-        android:layout_alignEnd="@+id/n25"
-        android:layout_toRightOf="@+id/checkButton"
-        android:layout_toEndOf="@+id/checkButton"
-        android:layout_alignBottom="@+id/checkButton" />
-
-    <Button
-        android:text="רווח"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/n30"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/n28"
-        android:layout_alignEnd="@+id/n28" />
+        android:layout_marginTop="8dp" />
 
 </RelativeLayout>
