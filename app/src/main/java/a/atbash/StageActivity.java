@@ -211,7 +211,6 @@ public class StageActivity extends AppCompatActivity {
                 ShareLinkContent content = new ShareLinkContent.Builder()
                         .setContentTitle(getString(R.string.shareTitle))
                         .setContentDescription("Final Project Magshimim - Noam Bar Shlomo & Dror Shter")
-                        .setQuote(messageToShare)
                         .setContentUrl(Uri.parse("http://developers.facebook.com/android"))
                         .build();
                 ShareDialog shareDialog = new ShareDialog(StageActivity.this);

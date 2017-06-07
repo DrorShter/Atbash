@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
     {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
         FacebookSdk.sdkInitialize(getApplicationContext());
+        setContentView(R.layout.activity_main2);
         System.out.println(FacebookSdk.getApplicationSignature(getApplicationContext()));
         stageHandler=new StageHandler(this);
         stageHandler.updateStagesFromServerIfNeeded();
